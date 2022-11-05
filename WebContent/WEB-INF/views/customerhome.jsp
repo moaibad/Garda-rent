@@ -26,20 +26,21 @@
 	  No Telp 	: ${sessionScope['customer'].telp}<br>
 	  </p>
 	  
-	  <h3>Daftar Mobil yang Tersedia : </h3>
-	
-
-
-
-	<h2 align="center"><font><strong>Retrieve data from database in jsp</strong></font></h2>
+	</div>
+	<h2 align="center"><font><strong>Daftar Mobil yang Tersedia</strong></font></h2>
 	<table align="center" cellpadding="5" cellspacing="5" border="1">
 	<tr>
 	
 	</tr>
 	<tr bgcolor="#A52A2A">
 	<td><b>ID</b></td>
-	<td><b>NAMA</b></td>
 	<td><b>PLAT</b></td>
+	<td><b>NAMA</b></td>
+	<td><b>TAHUN</b></td>
+	<td><b>TIPE</b></td>
+	<td><b>MEREK</b></td>
+	<td><b>KAPASITAS</b></td>
+	<td><b>HARGA</b></td>
 	<td><b>PESAN</b></td>
 	</tr>
 	<%
@@ -57,10 +58,28 @@
 	<tr bgcolor="#DEB887">
 	
 	<td><%=resultSet.getString("id") %></td>
-	<td><%=resultSet.getString("nama") %></td>
 	<td><%=resultSet.getString("plat") %></td>
-	<td><input type="submit" value="Pesan" /></td>
+	<td><%=resultSet.getString("nama") %></td>
+	<td><%=resultSet.getString("tahun") %></td>
+	<td><%=resultSet.getString("tipe") %></td>
+	<td><%=resultSet.getString("merek") %></td>
+	<td><%=resultSet.getInt("kapasitas") %></td>
+	<td><%=resultSet.getInt("harga") %></td>
+	<td>
+	<form action="<%= request.getContextPath() %>/sewa" method="post">
+		<input type='hidden' name='mobil_id' value=<%=resultSet.getString("id") %> />
+		<input type='hidden' name='mobil_plat' value=<%=resultSet.getString("plat") %> />
+		<input type='hidden' name='mobil_nama' value=<%=resultSet.getString("nama") %> />
+		<input type='hidden' name='mobil_tahun' value=<%=resultSet.getString("tahun") %> />
+		<input type='hidden' name='mobil_tipe' value=<%=resultSet.getString("tipe") %> />
+		<input type='hidden' name='mobil_merek' value=<%=resultSet.getString("merek") %> />
+		<input type='hidden' name='mobil_kapasitas' value=<%=resultSet.getInt("kapasitas") %> />
+		<input type='hidden' name='mobil_harga' value=<%=resultSet.getInt("harga") %> />
+		<input type='submit' value='Pesan' />
+	</form>
+	</td>
 	
+
 	</tr>
 	
 	<% 

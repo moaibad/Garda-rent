@@ -11,7 +11,6 @@ public class Mobil {
 	private int kapasitas;
 	private int harga;
 	private String status;
-	
 	public String getId() {
 		return id;
 	}
@@ -66,6 +65,7 @@ public class Mobil {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 	
 	
 }
