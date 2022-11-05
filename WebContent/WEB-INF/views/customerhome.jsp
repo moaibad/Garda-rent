@@ -17,7 +17,7 @@
 	  <h1>Selamat Datang ${sessionScope['customer'].nama}</h1>
 	  
 	  <p align = "left">
-	  ID : ${sessionScope['customer'].id}<br>
+	  ID 		: ${sessionScope['customer'].id}<br>
 	  Email 	: ${sessionScope['customer'].email}<br>
 	  Password 	: ${sessionScope['customer'].password}<br>
 	  Nama 		: ${sessionScope['customer'].nama}<br>

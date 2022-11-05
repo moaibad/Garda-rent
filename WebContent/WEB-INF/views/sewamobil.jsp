@@ -20,6 +20,16 @@
 	  Kapasitas 	: ${sessionScope['mobil'].kapasitas}<br>
 	  Harga 		: ${sessionScope['mobil'].harga}<br>
 	</p>
+	
+	<form action="<%= request.getContextPath() %>/confirmSewa" method="post">
+	   <table style="with: 80%">
+	    <tr>
+	     <td>Lama Sewa</td>
+	     <td><input type="number" name="lama_sewa" /></td>
+	    </tr>
+	   </table>
+	   <input type="submit" value="Submit" />
+  	</form>
  </div>
 </body>
 </html>

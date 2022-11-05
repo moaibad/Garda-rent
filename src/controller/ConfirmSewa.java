@@ -11,20 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.SewaDao;
+import model.Customer;
 import model.Mobil;
+import model.Sewa;
 
 /**
- * Servlet implementation class SewaServlet
+ * Servlet implementation class ConfirmSewa
  */
-@WebServlet("/sewa")
-public class SewaServlet extends HttpServlet {
+@WebServlet("/confirmSewa")
+public class ConfirmSewa extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      
-	SewaDao sewaDao = new SewaDao();
+    SewaDao sewaDao = new SewaDao();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SewaServlet() {
+    public ConfirmSewa() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,26 +36,7 @@ public class SewaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/sewamobil.jsp");
-		
-		Mobil mobil = new Mobil();
-		
-		mobil.setId(request.getParameter("mobil_id"));
-		mobil.setPlat(request.getParameter("mobil_plat"));
-		mobil.setNama(request.getParameter("mobil_nama"));
-		mobil.setTahun(request.getParameter("mobil_tahun"));
-		mobil.setTipe(request.getParameter("mobil_tipe"));
-		mobil.setMerek(request.getParameter("mobil_merek"));
-		mobil.setKapasitas(Integer.parseInt(request.getParameter("mobil_kapasitas")));
-		mobil.setHarga(Integer.parseInt(request.getParameter("mobil_harga")));
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("mobil",mobil);
-		
-		dispatcher.forward(request, response);
-		
+
 	}
 
 	/**
@@ -64,6 +46,38 @@ public class SewaServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		
+		
+		HttpSession session = request.getSession();
+		System.out.println("Sesi Login 3: " + session.getId());
+		
+		Mobil mobil = new Mobil();
+		mobil = (Mobil) session.getAttribute("mobil");
+		Customer customer = new Customer();
+		customer = (Customer) session.getAttribute("customer");
+		
+		int harga = mobil.getHarga();
+		String mobil_id = mobil.getId();
+		String customer_id = customer.getId();
+		int lama_sewa = (Integer.parseInt(request.getParameter("lama_sewa")));
+		
+		Sewa sewa = new Sewa();
+		
+		sewa.setHarga(harga);
+		sewa.setMobil_id(mobil_id);
+		sewa.setCustomer_id(customer_id);
+		sewa.setLama_sewa(lama_sewa);
+		
+		try {
+			sewaDao.tambahSewa(sewa);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(sewa.getCustomer_id());
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/customerhome.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
