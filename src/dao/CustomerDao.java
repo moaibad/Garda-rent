@@ -68,13 +68,19 @@ public class CustomerDao {
             	customer.setKtp(result.getString("ktp"));
             	customer.setSim(result.getString("sim"));
             	customer.setTelp(result.getString("telp"));
+            	result.close();
+            	preparedStatement.close();
+            	connection.close();
             	return customer;
             }
             else {
             	System.out.println("Login Failed!");
+            	result.close();
+            	preparedStatement.close();
+            	connection.close();
             	return null;
             }
-
+          
         } catch (Exception e) {
             // process sql exception
             e.printStackTrace();

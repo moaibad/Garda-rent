@@ -50,9 +50,10 @@
 	try{ 
 	connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TEST", "123");
 	statement=connection.createStatement();
-	String sql ="SELECT * FROM mobil";
+	String sql ="select * from mobil where status = 'Tersedia'";
 	
 	resultSet = statement.executeQuery(sql);
+	System.out.println(statement);
 	while(resultSet.next()){
 	%>
 	<tr bgcolor="#DEB887">
@@ -66,7 +67,7 @@
 	<td><%=resultSet.getInt("kapasitas") %></td>
 	<td><%=resultSet.getInt("harga") %></td>
 	<td>
-	<form action="<%= request.getContextPath() %>/sewa" method="post">
+	<form action="<%= request.getContextPath() %>/sewa" method="get">
 		<input type='hidden' name='mobil_id' value=<%=resultSet.getString("id") %> />
 		<input type='hidden' name='mobil_plat' value=<%=resultSet.getString("plat") %> />
 		<input type='hidden' name='mobil_nama' value=<%=resultSet.getString("nama") %> />
@@ -84,12 +85,17 @@
 	
 	<% 
 	}
-	
 	} catch (Exception e) {
 	e.printStackTrace();
 	}
+	statement.close();
+	connection.close();
 	%>
 	</table>
+	
+	<form action="<%= request.getContextPath() %>/reset" method="get">
+		<input type='submit' value='Reset' />
+	</form>
 
 	
 </body>

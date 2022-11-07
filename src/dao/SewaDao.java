@@ -29,6 +29,7 @@ public class SewaDao {
             
             // Step 3: Execute the query or update query
             callableStatement.executeUpdate();
+            connection.close();
 
         } catch (Exception e) {
             // process sql exception
