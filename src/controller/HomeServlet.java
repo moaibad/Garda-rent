@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,12 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.MobilDao;
+
 /**
  * Servlet implementation class HomeServlet
  */
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	MobilDao mobilDao = new MobilDao();
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,16 +43,16 @@ public class HomeServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/customerhome.jsp");
 		
 		
-//		ResultSet mobil;
-//		
-//		try {
-//			mobil = mobilDao.tampilMobil();
-//			session.setAttribute("mobil",mobil);
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
+		ResultSet mobil;
+		
+		try {
+			mobil = mobilDao.tampilMobil();
+			session.setAttribute("mobil",mobil);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		dispatcher.forward(request, response);
 	}

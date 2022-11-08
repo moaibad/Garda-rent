@@ -1,28 +1,68 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
- pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
+<%@include file="header.jsp" %>
 <body>
- <div align="center">
-  <h1>Customer Login Form</h1>
-  <form action="<%= request.getContextPath() %>/login" method="post">
-   <table style="with: 80%">
-    <tr>
-     <td>Email</td>
-     <td><input type="text" name="email" /></td>
-    </tr>
-    <tr>
-     <td>Password</td>
-     <td><input type="password" name="password" /></td>
-    </tr>
-   </table>
-   <input type="submit" value="Submit" />
-  </form>
-  <a href="<%= request.getContextPath() %>/register">Register</a>
- </div>
+	<div style="padding-top:50px;padding-bottom:50px" align="center">
+		<div class="col-sm-3">
+	    	<div class="card" style=" background: #ddd">
+	        	<div class="card-body">
+	                   Selamat Datang , Silahkan Login!
+	                   <br/>
+	                   <br/>
+	                   <form method="post" action="<%= request.getContextPath() %>/login">
+	                       <center><h5 class="card-title">Login</h5></center>
+	                       <h6 class="card-subtitle mb-2 text-muted"></h6>
+	                       <div class="form-group">
+	                       <label for="">Username</label>
+	                       <input type="text" name="email" id="" class="form-control" placeholder="" aria-describedby="helpId">
+	                       </div>
+	                       <div class="form-group">
+	                       <label for="">Password</label>
+	                       <input type="password" name="password" id="" class="form-control" placeholder="" aria-describedby="helpId">
+	                       </div>
+	                       <center><button class="btn btn-primary">Login</button>
+	                       
+	                       <!-- Button trigger modal -->
+	                       <a class="btn btn-danger text-white" data-toggle="modal" data-target="#modelId">
+                            Daftar
+                         	</a></center>
+	                   </form>
+	        	</div>
+	    	</div>
+		</div>
+	</div>
 </body>
-</html>
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Daftar Pengguna</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/register">
+                    <div class="form-group">
+                    <label for="">Nama Pengguna</label>
+                    <input type="text" name="nama" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                    <label for="">Username</label>
+                    <input type="text" name="user" id="" class="form-control"  required placeholder="" aria-describedby="helpId">
+                    </div>
+                    <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" name="pass" id="" class="form-control" required placeholder="" aria-describedby="helpId">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-secondary text-white" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%@include file="footer.jsp" %>

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.management.relation.Role;
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import static java.lang.System.out;
 
 import dao.CustomerDao;
 import model.Customer;
@@ -69,7 +71,9 @@ public class LoginServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+			response.setContentType("text/html");
+			PrintWriter pw=response.getWriter();
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/loginfailed.jsp");
 			dispatcher.forward(request, response);	
 		}
 
