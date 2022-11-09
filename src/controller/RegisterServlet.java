@@ -1,4 +1,4 @@
-package controller;
+package controllers;
 
 import java.io.IOException;
 
@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CustomerDao;
-import model.Customer;
+import models.Customer;
 
 /**
  * Servlet implementation class CustomerServlet
  */
-@WebServlet("/register")
+@WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -51,6 +51,8 @@ public class RegisterServlet extends HttpServlet {
 		String ktp = request.getParameter("ktp");
 		String sim = request.getParameter("sim");
 		String telp = request.getParameter("telp");
+		String role = request.getParameter("role");
+
 		
 		Customer customer = new Customer();
 		customer.setEmail(email);
@@ -59,6 +61,7 @@ public class RegisterServlet extends HttpServlet {
 		customer.setKtp(ktp);
 		customer.setSim(sim);
 		customer.setTelp(telp);
+		customer.setRole(role);
 		
 		try {
 			customerDao.registerCustomer(customer);
@@ -66,7 +69,7 @@ public class RegisterServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/customerregister.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);	
 	}
 

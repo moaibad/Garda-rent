@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import model.Customer;
+import models.Customer;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -12,14 +12,14 @@ import java.sql.Connection;
 public class CustomerDao {
     
 	public int registerCustomer(Customer customer) throws ClassNotFoundException {
-        String sql = "{call registrasiCustomer (?, ?, ?, ?, ?, ?)}";
+        String sql = "{call registrasiCustomer (?, ?, ?, ?, ?, ?, ?)}";
         
         int result = 0;
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
         try (Connection connection = DriverManager
-            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TEST", "123");
+            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TUBES", "tubes");
 
             // Step 2:Create a statement using connection object
             CallableStatement callableStatement = connection.prepareCall(sql)){
@@ -29,6 +29,8 @@ public class CustomerDao {
     		callableStatement.setString(4, customer.getKtp());
     		callableStatement.setString(5, customer.getSim());
     		callableStatement.setString(6, customer.getTelp());
+    		callableStatement.setString(7, customer.getRole());
+
 
             System.out.println(callableStatement);
             
@@ -50,7 +52,7 @@ public class CustomerDao {
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
         try (Connection connection = DriverManager
-            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TEST", "123");
+            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TUBES", "tubes");
 
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareCall(sql)){
@@ -68,6 +70,7 @@ public class CustomerDao {
             	customer.setKtp(result.getString("ktp"));
             	customer.setSim(result.getString("sim"));
             	customer.setTelp(result.getString("telp"));
+            	customer.setRole(result.getString("role"));
             	result.close();
             	preparedStatement.close();
             	connection.close();
