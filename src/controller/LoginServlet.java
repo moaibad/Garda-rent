@@ -1,9 +1,8 @@
-package controllers;
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.management.relation.Role;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,15 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import static java.lang.System.out;
 
 import dao.CustomerDao;
-import models.Customer;
+import model.Customer;
 
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -62,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(customer.getRole());
+		
 		if(customer != null) {
 			if(customer.getRole().equals("customer")) {
 				HttpSession session = request.getSession();
@@ -70,14 +68,14 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("customer",customer);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/home");
 				dispatcher.forward(request, response);
-			}else{
+			}
+			else {
 				HttpSession session = request.getSession();
 				System.out.println("Sesi Login : " + session.getId());
 				session.setAttribute("customer",customer);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/adminhome.jsp");
 				dispatcher.forward(request, response);
 			}
-			
 		}
 		else {
 			response.setContentType("text/html");

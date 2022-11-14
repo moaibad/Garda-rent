@@ -2,13 +2,13 @@
 <body>
 	<div style="padding-top:50px;padding-bottom:50px" align="center">
 		<div class="col-sm-3">
-	    	<div class="card" style=" background: #ddd">
+	    	<div class="card" style=" background: #ddd;width: 25rem">
 	        	<div class="card-body">
 	                   Selamat Datang , Silahkan Login!
 	                   <br/>
 	                   <br/>
 	                   <form method="post" action="<%= request.getContextPath() %>/login">
-	                       <center><h5 class="card-title">Login</h5></center>
+	                       <center><h4 class="card-title">Login</h4></center>
 	                       <h6 class="card-subtitle mb-2 text-muted"></h6>
 	                       <div class="form-group">
 	                       <label for="">Username</label>

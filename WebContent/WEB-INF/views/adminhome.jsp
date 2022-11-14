@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center">
-	  <h1>Kamu adalah Admin</h1>	  
-	</div>
-
+	<h2>Kamu adalah admin</h2>
 </body>
 </html>
