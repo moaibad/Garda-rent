@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import models.Customer;
+import model.Customer;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -52,7 +52,7 @@ public class CustomerDao {
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
         try (Connection connection = DriverManager
-            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TUBES", "tubes");
+            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TEST", "123");
 
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareCall(sql)){
@@ -93,4 +93,3 @@ public class CustomerDao {
     }
 	
 }
-

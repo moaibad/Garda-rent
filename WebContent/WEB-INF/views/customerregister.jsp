@@ -9,7 +9,7 @@
 <body>
  <div align="center">
   <h1>Customer Register Form</h1>
-  <form action="<%= request.getContextPath() %>/RegisterServlet" method="post">
+  <form action="<%= request.getContextPath() %>/register" method="post">
    <table style="with: 80%">
     <tr>
      <td>Email</td>
@@ -34,10 +34,6 @@
     <tr>
      <td>No Telp</td>
      <td><input type="text" name="telp" /></td>
-    </tr>
-    <tr>
-     <td>Role</td>
-     <td><input type="text" name="role" /></td>
     </tr>
    </table>
    <input type="submit" value="Submit" />

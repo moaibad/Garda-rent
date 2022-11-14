@@ -4,7 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import models.Sewa;
+import model.Sewa;
 
 public class SewaDao {
 	
@@ -16,7 +16,7 @@ public class SewaDao {
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
         try (Connection connection = DriverManager
-            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TUBES", "tubes");
+            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TEST", "123");
 
             // Step 2:Create a statement using connection object
             CallableStatement callableStatement = connection.prepareCall(sql)){

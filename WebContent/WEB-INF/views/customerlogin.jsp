@@ -9,7 +9,7 @@
 <body>
  <div align="center">
   <h1>Customer Login Form</h1>
-  <form action="<%= request.getContextPath() %>/LoginServlet" method="get">
+  <form action="<%= request.getContextPath() %>/login" method="get">
    <table style="with: 80%">
     <tr>
      <td>Email</td>
