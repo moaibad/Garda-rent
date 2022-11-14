@@ -7,7 +7,7 @@
 	                   Selamat Datang , Silahkan Login!
 	                   <br/>
 	                   <br/>
-	                   <form method="post" action="<%= request.getContextPath() %>/login">
+	                   <form method="post" action="<%= request.getContextPath() %>/LoginServlet">
 	                       <center><h5 class="card-title">Login</h5></center>
 	                       <h6 class="card-subtitle mb-2 text-muted"></h6>
 	                       <div class="form-group">
@@ -21,7 +21,7 @@
 	                       <center><button class="btn btn-primary">Login</button>
 	                       
 	                       <!-- Button trigger modal -->
-	                       <a class="btn btn-danger text-white" data-toggle="modal" href="<%= request.getContextPath() %>/register">
+	                       <a class="btn btn-danger text-white" data-toggle="modal" href="<%= request.getContextPath() %>/RegisterServlet">
 	                           Daftar
 	                        </a></center>
 	                        <br/>

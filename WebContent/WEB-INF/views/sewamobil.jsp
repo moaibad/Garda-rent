@@ -21,7 +21,7 @@
 	  Harga 		: ${sessionScope['mobil'].harga}<br>
 	</p>
 	
-	<form action="<%= request.getContextPath() %>/confirmSewa" method="post">
+	<form action="<%= request.getContextPath() %>/Sewa" method="post">
 	   <table style="with: 80%">
 	    <tr>
 	     <td>Lama Sewa</td>

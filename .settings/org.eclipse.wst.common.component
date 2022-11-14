@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Garda-rent">
+    <wb-module deploy-name="RentalMobil">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="Garda-rent"/>
-        <property name="java-output-path" value="/Garda-rent/build/classes"/>
+        <property name="context-root" value="RentalMobil"/>
+        <property name="java-output-path" value="/RentalMobil/build/classes"/>
     </wb-module>
 </project-modules>

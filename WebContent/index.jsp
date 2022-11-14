@@ -2,13 +2,13 @@
 <body>
 	<div style="padding-top:50px;padding-bottom:50px" align="center">
 		<div class="col-sm-3">
-	    	<div class="card" style=" background: #ddd;width: 25rem">
+	    	<div class="card" style=" background: #ddd">
 	        	<div class="card-body">
 	                   Selamat Datang , Silahkan Login!
 	                   <br/>
 	                   <br/>
-	                   <form method="post" action="<%= request.getContextPath() %>/login">
-	                       <center><h4 class="card-title">Login</h4></center>
+	                   <form method="post" action="<%= request.getContextPath() %>/LoginServlet">
+	                       <center><h5 class="card-title">Login</h5></center>
 	                       <h6 class="card-subtitle mb-2 text-muted"></h6>
 	                       <div class="form-group">
 	                       <label for="">Username</label>
@@ -42,18 +42,34 @@
                     </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/register">
+                <form method="post" action="<%= request.getContextPath() %>/RegisterServlet">
                     <div class="form-group">
-                    <label for="">Nama Pengguna</label>
-                    <input type="text" name="nama" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                    <label for="">Username</label>
-                    <input type="text" name="user" id="" class="form-control"  required placeholder="" aria-describedby="helpId">
+                    <label for="">Email</label>
+                    <input type="text" name="email" class="form-control" required>
                     </div>
                     <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password" name="pass" id="" class="form-control" required placeholder="" aria-describedby="helpId">
+                    <input type="password" name="password" id="" class="form-control"  required placeholder="" aria-describedby="helpId">
+                    </div>
+                    <div class="form-group">
+                    <label for="">Nama</label>
+                    <input type="text" name="nama" id="" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                    <label for="">KTP</label>
+                    <input type="text" name="ktp" id="" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                    <label for="">SIM</label>
+                    <input type="text" name="sim" id="" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                    <label for="">No Telp</label>
+                    <input type="text" name="telp" id="" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                    <label for="">Role</label>
+                    <input type="text" name="role" id="" class="form-control" required>
                     </div>
             </div>
             <div class="modal-footer">
