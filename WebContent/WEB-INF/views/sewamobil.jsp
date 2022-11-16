@@ -1,35 +1,112 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
- <div align="center">
-  <h1>Halaman Sewa Modil</h1>
-  
-  	<p align = "left">
-	  ID 			: ${sessionScope['mobil'].id}<br>
-	  Plat 			: ${sessionScope['mobil'].plat}<br>
-	  Nama 			: ${sessionScope['mobil'].nama}<br>
-	  Tahun 		: ${sessionScope['mobil'].tahun}<br>
-	  Tipe 			: ${sessionScope['mobil'].tipe}<br>
-	  Merek 		: ${sessionScope['mobil'].merek}<br>
-	  Kapasitas 	: ${sessionScope['mobil'].kapasitas}<br>
-	  Harga 		: ${sessionScope['mobil'].harga}<br>
-	</p>
-	
-	<form action="<%= request.getContextPath() %>/confirmSewa" method="post">
-	   <table style="with: 80%">
-	    <tr>
-	     <td>Lama Sewa</td>
-	     <td><input type="number" name="lama_sewa" /></td>
-	    </tr>
-	   </table>
-	   <input type="submit" value="Submit" />
-  	</form>
- </div>
-</body>
-</html>
+pageEncoding="ISO-8859-1"%> <%@include file="/header.jsp" %>
+<br />
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img src="" class="card-img-top" style="height: 200px" />
+        <div class="card-body" style="background: #ddd">
+          <h5 class="card-title">${sessionScope['mobil'].nama}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-primary text-white">
+            <i class="fa fa-check"></i> Available
+          </li>
+          <li class="list-group-item bg-info text-white">
+            <i class="fa fa-check"></i> Free E-toll 50k
+          </li>
+          <li class="list-group-item bg-dark text-white">
+            <i class="fa fa-money"></i> Rp. ${sessionScope['mobil'].harga}/ day
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <form method="post"action="<%= request.getContextPath() %>/confirmSewa">
+            <div class="form-group">
+              <label for="">KTP</label>
+              <input
+                type="text"
+                name="ktp"
+                id=""
+                required
+                class="form-control"
+                placeholder="KTP / NIK Anda"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">Nama</label>
+              <input
+                type="text"
+                name="nama"
+                id=""
+                required
+                class="form-control"
+                placeholder="Nama Anda"
+                value="${sessionScope['akun'].nama}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">Alamat</label>
+              <input
+                type="text"
+                name="alamat"
+                id=""
+                required
+                class="form-control"
+                placeholder="Alamat"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">Telepon</label>
+              <input
+                type="text"
+                name="no_tlp"
+                id=""
+                required
+                class="form-control"
+                placeholder="Telepon"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">Tanggal Sewa</label>
+              <input
+                type="date"
+                name="tanggal"
+                id=""
+                required
+                class="form-control"
+                placeholder="Nama Anda"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">Lama Sewa</label>
+              <input
+                type="number"
+                name="lama_sewa"
+                id=""
+                required
+                class="form-control"
+                placeholder="Lama Sewa"
+              />
+            </div>
+            <hr />
+            <button type="submit" class="btn btn-primary float-right">
+              Booking Now
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+
+<br />
+
+<%@include file="/footer.jsp" %>

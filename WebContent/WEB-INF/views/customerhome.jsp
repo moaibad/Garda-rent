@@ -26,7 +26,7 @@
 		%>
             <div class="col-sm-4">
                 <div class="card">
-                <img src="assets/image/<?php echo $isi['gambar'];?>" class="card-img-top" style="height:200px;object-fit:cover;">
+                <img src="" class="card-img-top" style="height:200px;object-fit:cover;">
                     <div class="card-body" style="background:#ddd">
                         <h5 class="card-title"><%=resultSet.getString("nama")%></h5>
                     </div>

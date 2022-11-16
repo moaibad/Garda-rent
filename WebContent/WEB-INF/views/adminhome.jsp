@@ -1,4 +1,4 @@
-<%@include file="header.jsp" %>
+<%@include file="/header.jsp" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -38,18 +38,15 @@
 	<td><b>Email</b></td>
 	<td><b>Password</b></td>
 	<td><b>Nama</b></td>
-	<td><b>KTP</b></td>
-	<td><b>SIM</b></td>
-	<td><b>No.Telp</b></td>
 	</tr>
 	<%
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet resultSet = null;
 	try{ 
-	connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TUBES", "tubes");
+	connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TEST", "123");
 	statement=connection.createStatement();
-	String sql ="select * from customer where role = 'customer'";
+	String sql ="select * from akun where role = 'customer'";
 	
 	resultSet = statement.executeQuery(sql);
 	System.out.println(statement);
@@ -61,21 +58,6 @@
 	<td><%=resultSet.getString("email") %></td>
 	<td><%=resultSet.getString("password") %></td>
 	<td><%=resultSet.getString("nama") %></td>
-	<td><%=resultSet.getString("ktp") %></td>
-	<td><%=resultSet.getString("sim") %></td>
-	<td><%=resultSet.getInt("telp") %></td>
-	
-	<form action="<%= request.getContextPath() %>/RegisterServlet" method="get">
-		<input type='hidden' name='cutomer_id' value=<%=resultSet.getString("id") %> />
-		<input type='hidden' name='customer_email' value=<%=resultSet.getString("email") %> />
-		<input type='hidden' name='customer_password' value=<%=resultSet.getString("password") %> />
-		<input type='hidden' name='customer_nama' value=<%=resultSet.getString("nama") %> />
-		<input type='hidden' name='customer_ktp' value=<%=resultSet.getString("ktp") %> />
-		<input type='hidden' name='customer_sim' value=<%=resultSet.getString("sim") %> />
-		<input type='hidden' name='customer_telp' value=<%=resultSet.getInt("telp") %> />
-	</form>
-	</td>
-	
 
 	</tr>
 	
@@ -88,12 +70,8 @@
 	connection.close();
 	%>
 	</table>
-	
-	<form action="<%= request.getContextPath() %>/reset" method="get">
-		<input type='submit' value='Reset' />
-	</form>
 
 	
 </body>
 </html>
-<%@include file="footer.jsp" %>
+<%@include file="/footer.jsp" %>

@@ -6,30 +6,31 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 
 public class MobilDao {
-	
-	public ResultSet tampilMobil() throws ClassNotFoundException {
-        String sql = "select * from mobil";
-        
-        ResultSet result = null;
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
+  public ResultSet tampilMobil() throws ClassNotFoundException {
+    String sql = "select * from mobil";
 
-        try (Connection connection = DriverManager
-            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TEST", "123");
-        		
-            // Step 2:Create a statement using connection object
-            CallableStatement callableStatement = connection.prepareCall(sql)){
-            
-            System.out.println(callableStatement);
-            
-            // Step 3: Execute the query or update query
-            result = callableStatement.executeQuery(sql);
+    ResultSet result = null;
 
-        } catch (Exception e) {
-            // process sql exception
-            e.printStackTrace();
-        }
-        return result;
+    Class.forName("oracle.jdbc.driver.OracleDriver");
+
+    try (
+      Connection connection = DriverManager.getConnection(
+        "jdbc:oracle:thin:@localhost:1521:xe",
+        "TEST",
+        "123"
+      );
+      // Step 2:Create a statement using connection object
+      CallableStatement callableStatement = connection.prepareCall(sql)
+    ) {
+      System.out.println(callableStatement);
+
+      // Step 3: Execute the query or update query
+      result = callableStatement.executeQuery(sql);
+    } catch (Exception e) {
+      // process sql exception
+      e.printStackTrace();
     }
-	
+    return result;
+  }
 }

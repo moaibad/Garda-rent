@@ -12,7 +12,7 @@
 	                       <h6 class="card-subtitle mb-2 text-muted"></h6>
 	                       <div class="form-group">
 	                       <label for="">Username</label>
-	                       <input type="text" name="email" id="" class="form-control" placeholder="" aria-describedby="helpId">
+	                       <input type="text" name="username" id="" class="form-control" placeholder="" aria-describedby="helpId">
 	                       </div>
 	                       <div class="form-group">
 	                       <label for="">Password</label>
@@ -42,18 +42,22 @@
                     </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/register">
+                <form method="post" action="<%= request.getContextPath() %>/register">
                     <div class="form-group">
                     <label for="">Nama Pengguna</label>
                     <input type="text" name="nama" class="form-control" required>
                     </div>
                     <div class="form-group">
                     <label for="">Username</label>
-                    <input type="text" name="user" id="" class="form-control"  required placeholder="" aria-describedby="helpId">
+                    <input type="text" name="username" id="" class="form-control"  required placeholder="" aria-describedby="helpId">
                     </div>
                     <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password" name="pass" id="" class="form-control" required placeholder="" aria-describedby="helpId">
+                    <input type="password" name="password" id="" class="form-control" required placeholder="" aria-describedby="helpId">
+                    </div>
+                    <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="text" name="email" id="" class="form-control" required placeholder="" aria-describedby="helpId">
                     </div>
             </div>
             <div class="modal-footer">
