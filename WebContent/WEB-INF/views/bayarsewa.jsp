@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> <%@include file="/header.jsp" %>
+pageEncoding="ISO-8859-1"%> 
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@include file="/header.jsp" %>
 
 <br>
 <br>
@@ -11,7 +13,7 @@ pageEncoding="ISO-8859-1"%> <%@include file="/header.jsp" %>
 
                 <center><h3>Pembayaran Dapat Melalui :</h3>
                 <hr/>
-                <p> BRI 2132131246 A/N Rental Dirga </p></center>
+                <p> BRI 2132131246 A/N Rental Suci </p></center>
 
             </div>
         </div>
@@ -49,7 +51,7 @@ pageEncoding="ISO-8859-1"%> <%@include file="/header.jsp" %>
                         <tr>
                             <td>Total yg Harus di Bayar </td>
                             <td> :</td>
-                            <td>Rp. ${sessionScope['sewa'].total_bayar}</td>
+                            <td>Rp. <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${sessionScope['sewa'].total_bayar}" />,-</td>
                         </tr>
                     </table>
                     <input type="hidden" name="sewa_id" value="${sessionScope['sewa'].id}">

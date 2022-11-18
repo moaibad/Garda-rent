@@ -40,5 +40,8 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="kontak.php">Kontak Kami</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://localhost:8081/Garda-rent/history?id=${sessionScope['akun'].id}">History</a>
+                </li>
         </div>
     </nav>

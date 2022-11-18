@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> 
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<%@include file="/header.jsp" %>
-
+pageEncoding="ISO-8859-1"%> <%@include file="/header.jsp" %>
 
 <br />
 <br />
@@ -71,7 +68,7 @@ pageEncoding="ISO-8859-1"%>
             <tr>
               <td>Total Harga</td>
               <td>:</td>
-              <td>Rp. <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${sessionScope['sewa'].total_bayar}"/>,-</td>
+              <td>Rp. ${sessionScope['sewa'].total_bayar}</td>
             </tr>
             <tr>
               <td>Status</td>

@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Akun;
 import model.Pembayaran;
@@ -14,8 +16,6 @@ public class SewaDao {
 
   public int tambahSewa(Sewa sewa) throws ClassNotFoundException {
     String sql = "{call tambahSewa (?, ?, ?, ?, ?, ?, ?, ?)}";
-
-    int result;
 
     Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -71,8 +71,8 @@ public class SewaDao {
 	    return 0;
 	  }
   
-  public Sewa tampil_sewa(Sewa sewa) throws ClassNotFoundException {
-	    String sql = "select * from sewa where mobil_id=?";
+  public Sewa tampil_sewa(String id) throws ClassNotFoundException {
+	    String sql = "select * from sewa where id=?";
 
 	    ResultSet result = null;
 
@@ -87,12 +87,13 @@ public class SewaDao {
 	      // Step 2:Create a statement using connection object
 	      PreparedStatement preparedStatement = connection.prepareCall(sql)
 	    ) {
-	      preparedStatement.setString(1, sewa.getMobil_id());
+	      preparedStatement.setString(1, id);
 
 	      // Step 3: Execute the query or update query
 	      result = preparedStatement.executeQuery();
 
 	      if (result.next()) {
+	    	Sewa sewa = new Sewa();
 	        sewa.setId(result.getString("id"));
 	        sewa.setCustomer_id(result.getString("customer_id"));
 	        sewa.setAlamat(result.getString("alamat"));
@@ -102,8 +103,7 @@ public class SewaDao {
 	        sewa.setLama_sewa(result.getInt("lama_sewa"));
 	        sewa.setKtp(result.getString("ktp"));
 	        sewa.setTelepon(result.getString("telepon"));
-	        
-	        
+	        sewa.setNama(result.getString("nama"));
 	        
 	        result.close();
 	        preparedStatement.close();
@@ -122,4 +122,91 @@ public class SewaDao {
 	    }
 	    return null;
 	  }
+  
+  public List<Sewa> tampil_history(String customer_id) throws ClassNotFoundException {
+
+	    List<Sewa> listSewa = new ArrayList<Sewa>();
+
+	    Class.forName("oracle.jdbc.driver.OracleDriver");
+
+	    try (
+	      Connection connection = DriverManager.getConnection(
+	        "jdbc:oracle:thin:@localhost:1521:xe","TEST","123");
+	      // Step 2:Create a statement using connection object
+	      PreparedStatement preparedStatement = connection.prepareCall(
+	    		"SELECT sewa.*, mobil.nama as nama_mobil " + 
+	    		"FROM sewa " + 
+	    		"INNER JOIN mobil ON sewa.mobil_id=mobil.id " + 
+	    		"WHERE sewa.customer_id = ?")) {
+	      preparedStatement.setString(1, customer_id);
+	      
+	      ResultSet rs = preparedStatement.executeQuery();
+	      
+	      while (rs.next()) {
+				Sewa sewa= new Sewa();
+				sewa.setId(rs.getString("id"));
+				sewa.setNama(rs.getString("nama"));
+				sewa.setTotal_bayar(rs.getInt("total_bayar"));
+				sewa.setLama_sewa(rs.getInt("lama_sewa"));
+				sewa.setStatus(rs.getString("status"));
+				sewa.setMobil_id(rs.getString("mobil_id"));
+				sewa.setNama_mobil(rs.getString("nama_mobil"));
+				listSewa.add(sewa);
+			}
+	      
+	      connection.close();
+	      preparedStatement.close();
+	      // Step 3: Execute the query or update query
+	    } catch (Exception e) {
+	      // process sql exception
+	      e.printStackTrace();
+	    }
+	    return listSewa;
+  }
+  
+  
+  public String getSewaId() throws ClassNotFoundException {
+	    String sql = "select id from sewa order by id desc";
+
+	    ResultSet result = null;
+
+	    Class.forName("oracle.jdbc.driver.OracleDriver");
+
+	    try (
+	      Connection connection = DriverManager.getConnection(
+	        "jdbc:oracle:thin:@localhost:1521:xe",
+	        "TEST",
+	        "123"
+	      );
+	      // Step 2:Create a statement using connection object
+	      PreparedStatement preparedStatement = connection.prepareCall(sql)
+	    ) {
+
+	      // Step 3: Execute the query or update query
+	      result = preparedStatement.executeQuery();
+
+	      if (result.next()) {
+	    	String sewaId = result.getString("id");
+	        result.close();
+	        preparedStatement.close();
+	        connection.close();
+	        System.out.println(sewaId);
+	        return sewaId;
+	        
+	      } else {
+	        System.out.println("Login Failed!");
+	        result.close();
+	        preparedStatement.close();
+	        connection.close();
+	        return null;
+	      }
+	    } catch (Exception e) {
+	      // process sql exception
+	      e.printStackTrace();
+	    }
+	    return null;
+	  }
 }
+
+
+

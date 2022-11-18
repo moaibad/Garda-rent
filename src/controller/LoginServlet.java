@@ -71,6 +71,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         System.out.println("Sesi Login : " + session.getId());
         session.setAttribute("akun", akun);
+        session.setAttribute("username", akun.getUsername());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/home");
         dispatcher.forward(request, response);
       } else {

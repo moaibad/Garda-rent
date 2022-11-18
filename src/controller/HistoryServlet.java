@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,25 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MobilDao;
 import dao.SewaDao;
-import model.Mobil;
 import model.Sewa;
 
 /**
- * Servlet implementation class BayarSewa
+ * Servlet implementation class history
  */
-@WebServlet("/detailsewa")
-public class DetailSewa extends HttpServlet {
+@WebServlet("/history")
+public class HistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	SewaDao sewaDao = new SewaDao();
-	MobilDao mobilDao = new MobilDao();
-	
+    SewaDao sewaDao = new SewaDao();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetailSewa() {
+    public HistoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,23 +36,22 @@ public class DetailSewa extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-//		HttpSession session = request.getSession();
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/detailsewa.jsp");
-		Sewa sewa = new Sewa();
-		Mobil mobil = new Mobil();
-		String sewa_id = request.getParameter("id");
+		String customer_id = request.getParameter("id");
+		
+		List<Sewa> listSewa = new ArrayList<Sewa>();
 		
 		try {
-			sewa = sewaDao.tampil_sewa(sewa_id);
-			mobil = mobilDao.tampil_mobil(sewa.getMobil_id());
+			listSewa = sewaDao.tampil_history(customer_id);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		request.getSession().setAttribute("sewa", sewa);
-		request.getSession().setAttribute("mobil", mobil);
-	    dispatcher.forward(request, response);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("listSewa", listSewa);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/history.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

@@ -6,6 +6,15 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 
+<%
+String username = (String)session.getAttribute("username");
+
+if(username==null) { // Means session is not there
+%>
+<jsp:forward page="/index.jsp" />
+<%}%>
+
+
 <%@include file="/header.jsp" %>
 <div class="container">
 <div class="row">

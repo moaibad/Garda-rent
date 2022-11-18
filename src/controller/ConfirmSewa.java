@@ -63,7 +63,7 @@ public class ConfirmSewa extends HttpServlet {
     String customer_id = akun.getId();
     String alamat = request.getParameter("alamat");
     String ktp = request.getParameter("ktp");
-    String nama = akun.getNama();
+    String nama = request.getParameter("nama");
     String telepon = request.getParameter("no_tlp");
     int lama_sewa = (Integer.parseInt(request.getParameter("lama_sewa")));
 
@@ -77,15 +77,18 @@ public class ConfirmSewa extends HttpServlet {
     sewa.setKtp(ktp);
     sewa.setNama(nama);
     sewa.setTelepon(telepon);
-
+    
     try {
       sewaDao.tambahSewa(sewa);
+      sewa.setId(sewaDao.getSewaId());
     } catch (ClassNotFoundException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+    
     request.getSession().setAttribute("sewa", sewa);
-    response.sendRedirect("/Garda-rent/detailsewa");
+    
+    response.sendRedirect("/Garda-rent/detailsewa?id="+sewa.getId());
   }
   
 }

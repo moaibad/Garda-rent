@@ -14,8 +14,18 @@ public class Sewa {
   private String alamat;
   private String telepon;
   private String status;
+  private String nama_mobil;
 
   
+  
+public String getNama_mobil() {
+	return nama_mobil;
+}
+
+public void setNama_mobil(String nama_mobil) {
+	this.nama_mobil = nama_mobil;
+}
+
 public String getStatus() {
 	return status;
   }
