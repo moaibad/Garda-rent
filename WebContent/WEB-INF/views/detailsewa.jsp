@@ -3,6 +3,15 @@ pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/header.jsp" %>
 
+<%
+String booking = (String)session.getAttribute("booking");
+
+if(booking!=null) { // Means session is not there
+%>
+<script>alert("Anda Sukses Booking silahkan Melakukan Pembayaran");</script>
+<%session.removeAttribute("booking");
+}
+%>
 
 <br />
 <br />

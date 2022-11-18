@@ -2,6 +2,7 @@ package controller;
 
 import dao.SewaDao;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -86,8 +87,8 @@ public class ConfirmSewa extends HttpServlet {
       e.printStackTrace();
     }
     
-    request.getSession().setAttribute("sewa", sewa);
-    
+    session.setAttribute("sewa", sewa);
+    session.setAttribute("booking", "booking");
     response.sendRedirect("/Garda-rent/detailsewa?id="+sewa.getId());
   }
   
