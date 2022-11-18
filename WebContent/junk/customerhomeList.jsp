@@ -40,7 +40,17 @@ if(username==null) { // Means session is not there
                     </ul>
                     <div class="card-body">
                         <center>                        
-	                        <a href="/Garda-rent/sewa?id=<%=mobil.getId()%>" class="btn btn-success">Booking now!</a>
+	                        <form class="btn btn-success" action="<%= request.getContextPath() %>/sewa" method="post">
+								<input type='hidden' name='mobil_id' value=<%=mobil.getId()%> />
+								<input type='hidden' name='mobil_plat' value=<%=mobil.getPlat()%> />
+								<input type='hidden' name='mobil_nama' value=<%=mobil.getNama()%> />
+								<input type='hidden' name='mobil_tahun' value=<%=mobil.getTahun()%> />
+								<input type='hidden' name='mobil_tipe' value=<%=mobil.getTipe()%> />
+								<input type='hidden' name='mobil_merek' value=<%=mobil.getMerek()%> />
+								<input type='hidden' name='mobil_kapasitas' value=<%=mobil.getKapasitas()%> />
+								<input type='hidden' name='mobil_harga' value=<%=mobil.getHarga()%> />
+								<button type='submit' class="btn btn-success btn-sm">Booking Now!</button>
+							</form>
                             <a href="detail.php?id=<?php echo $isi['id_mobil'];?>" class="btn btn-info">Detail</a>
                         </center>
                     </div>

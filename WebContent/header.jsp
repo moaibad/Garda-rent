@@ -32,7 +32,7 @@
             <a class="navbar-brand" href="#"></a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="http://localhost:8081/Garda-rent/home">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="blog.php">Daftar Mobil</a>

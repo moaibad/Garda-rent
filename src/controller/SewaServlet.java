@@ -1,5 +1,6 @@
 package controller;
 
+import dao.MobilDao;
 import dao.SewaDao;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -19,7 +20,7 @@ public class SewaServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
-  SewaDao sewaDao = new SewaDao();
+  MobilDao mobilDao = new MobilDao();
 
   /**
    * @see HttpServlet#HttpServlet()
@@ -32,42 +33,33 @@ public class SewaServlet extends HttpServlet {
   /**
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
-  protected void doGet(
-    HttpServletRequest request,
-    HttpServletResponse response
-  ) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
     // TODO Auto-generated method stub
-
+	  HttpSession session = request.getSession();
+	  String mobil_id = request.getParameter("id");
+	
+	  Mobil mobil = new Mobil();
+		
+	  try {
+		  mobil = mobilDao.tampil_mobil(mobil_id);
+		  session.setAttribute("mobil", mobil);
+	  } catch (ClassNotFoundException e) {
+		  // TODO Auto-generated catch block
+		  e.printStackTrace();
+	  }
+		
+	  RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/sewamobil.jsp");
+	  dispatcher.forward(request, response);	  
   }
+  
+  
 
   /**
    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
    */
-  protected void doPost(
-    HttpServletRequest request,
-    HttpServletResponse response
-  ) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
     // TODO Auto-generated method stub
     response.getWriter().append("Served at: ").append(request.getContextPath());
 
-    HttpSession session = request.getSession();
-    RequestDispatcher dispatcher = request.getRequestDispatcher(
-      "/WEB-INF/views/sewamobil.jsp"
-    );
-
-    Mobil mobil = new Mobil();
-
-    mobil.setId(request.getParameter("mobil_id"));
-    mobil.setPlat(request.getParameter("mobil_plat"));
-    mobil.setNama(request.getParameter("mobil_nama"));
-    mobil.setTahun(request.getParameter("mobil_tahun"));
-    mobil.setTipe(request.getParameter("mobil_tipe"));
-    mobil.setMerek(request.getParameter("mobil_merek"));
-    mobil.setKapasitas(Integer.parseInt(request.getParameter("mobil_kapasitas")));
-    mobil.setHarga(Integer.parseInt(request.getParameter("mobil_harga")));
-
-    session.setAttribute("mobil", mobil);
-
-    dispatcher.forward(request, response);
   }
 }

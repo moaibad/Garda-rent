@@ -1,8 +1,14 @@
 package controller;
 
 import dao.MobilDao;
+import model.Mobil;
+import model.Sewa;
+
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,30 +38,22 @@ public class HomeServlet extends HttpServlet {
   /**
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
-  protected void doGet(
-    HttpServletRequest request,
-    HttpServletResponse response
-  ) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
     // TODO Auto-generated method stub
     response.getWriter().append("Served at: ").append(request.getContextPath());
 
     HttpSession session = request.getSession();
-    System.out.println("Sesi Login 2: " + session.getId());
-
-    RequestDispatcher dispatcher = request.getRequestDispatcher(
-      "/WEB-INF/views/customerhome.jsp"
-    );
-
-    ResultSet mobil;
+    List<Mobil> listMobil = new ArrayList<Mobil>();
 
     try {
-      mobil = mobilDao.tampilMobil();
-      session.setAttribute("mobil", mobil);
+      listMobil = mobilDao.list_mobil();
+      session.setAttribute("listMobil", listMobil);
     } catch (ClassNotFoundException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-
+    
+    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/customerhome.jsp");
     dispatcher.forward(request, response);
   }
 

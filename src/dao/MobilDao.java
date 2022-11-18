@@ -5,43 +5,57 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Mobil;
 import model.Sewa;
 
 public class MobilDao {
 
-  public ResultSet tampilMobil() throws ClassNotFoundException {
-    String sql = "select * from mobil";
+	public List<Mobil> list_mobil() throws ClassNotFoundException {
 
-    ResultSet result = null;
+	    List<Mobil> listMobil = new ArrayList<Mobil>();
 
-    Class.forName("oracle.jdbc.driver.OracleDriver");
+	    Class.forName("oracle.jdbc.driver.OracleDriver");
 
-    try (
-      Connection connection = DriverManager.getConnection(
-        "jdbc:oracle:thin:@localhost:1521:xe",
-        "TEST",
-        "123"
-      );
-      // Step 2:Create a statement using connection object
-      CallableStatement callableStatement = connection.prepareCall(sql)
-    ) {
-      System.out.println(callableStatement);
-
-      // Step 3: Execute the query or update query
-      result = callableStatement.executeQuery(sql);
-    } catch (Exception e) {
-      // process sql exception
-      e.printStackTrace();
-    }
-    return result;
+	    try (
+	      Connection connection = DriverManager.getConnection(
+	        "jdbc:oracle:thin:@localhost:1521:xe","TEST","123");
+	      // Step 2:Create a statement using connection object
+	      PreparedStatement preparedStatement = connection.prepareCall(
+	    		"SELECT * from mobil WHERE status = 'Tersedia'")) {
+	      
+	      
+	      ResultSet rs = preparedStatement.executeQuery();
+	      
+	      while (rs.next()) {
+				Mobil mobil= new Mobil();
+				mobil.setId(rs.getString("id"));
+				mobil.setPlat(rs.getString("plat"));
+				mobil.setNama(rs.getString("nama"));
+				mobil.setTahun(rs.getString("tahun"));
+				mobil.setTipe(rs.getString("tipe"));
+				mobil.setMerek(rs.getString("merek"));
+				mobil.setKapasitas(rs.getInt("kapasitas"));
+				mobil.setHarga(rs.getInt("harga"));
+				listMobil.add(mobil);
+			}
+	      
+	      connection.close();
+	      preparedStatement.close();
+	      // Step 3: Execute the query or update query
+	    } catch (Exception e) {
+	      // process sql exception
+	      e.printStackTrace();
+	    }
+	    return listMobil;
   }
   
   public Mobil tampil_mobil(String mobil_id) throws ClassNotFoundException {
 	    String sql = "select * from mobil where id=?";
 
-	    ResultSet result = null;
+	    ResultSet rs = null;
 
 	    Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -57,21 +71,26 @@ public class MobilDao {
 	      preparedStatement.setString(1, mobil_id);
 
 	      // Step 3: Execute the query or update query
-	      result = preparedStatement.executeQuery();
+	      rs = preparedStatement.executeQuery();
 
-	      if (result.next()) {
+	      if (rs.next()) {
 	    	Mobil mobil = new Mobil();
-	        mobil.setId(result.getString("id"));
-	        mobil.setNama(result.getString("nama"));
-	        mobil.setHarga(result.getInt("harga"));
+	        mobil.setId(rs.getString("id"));
+			mobil.setPlat(rs.getString("plat"));
+			mobil.setNama(rs.getString("nama"));
+			mobil.setTahun(rs.getString("tahun"));
+			mobil.setTipe(rs.getString("tipe"));
+			mobil.setMerek(rs.getString("merek"));
+			mobil.setKapasitas(rs.getInt("kapasitas"));
+			mobil.setHarga(rs.getInt("harga"));
 	        
-	        result.close();
+	        rs.close();
 	        preparedStatement.close();
 	        connection.close();
 	        return mobil;
 	      } else {
 	        System.out.println("Mobil Gaada!");
-	        result.close();
+	        rs.close();
 	        preparedStatement.close();
 	        connection.close();
 	        return null;

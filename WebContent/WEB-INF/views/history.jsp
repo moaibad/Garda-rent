@@ -31,11 +31,12 @@ pageEncoding="ISO-8859-1"%>
                     </thead>
                     <tbody>
                         <%
+                        int no = 1;
                         List<Sewa> listSewa = (List<Sewa>)session.getAttribute("listSewa");
                         for(Sewa sewa : listSewa){
                         %>
                         <tr>
-                            <td></td>
+                            <td><%out.print(no);%></td>
                             <td><%=sewa.getId()%></td>
                             <td><%=sewa.getNama_mobil()%></td>
                             <td><%=sewa.getNama()%></td>
@@ -43,13 +44,10 @@ pageEncoding="ISO-8859-1"%>
                             <td><%=sewa.getLama_sewa()%> Hari</td>
                             <td>Rp. <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "<%=sewa.getTotal_bayar()%>" />,-</td>
                             <td><%=sewa.getStatus()%></td>
-                            <td>
-                                <a class="btn btn-primary" href="http://localhost:8081/Garda-rent/detailsewa?id=<%=sewa.getId()%>" 
-                                role="button">Detail</a>   
-                            </td>
+                            <td><a class="btn btn-primary" href="/Garda-rent/detailsewa?id=<%=sewa.getId()%>" role="button">Detail</a></td>
                         </tr>
                         <%
-						}
+						no++;}
 						%>
 					</tbody>
                 </table>

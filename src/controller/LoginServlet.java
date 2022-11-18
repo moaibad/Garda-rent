@@ -52,6 +52,7 @@ public class LoginServlet extends HttpServlet {
     HttpServletResponse response
   ) throws ServletException, IOException {
     // TODO Auto-generated method stub
+	HttpSession session = request.getSession();
     String username = request.getParameter("username");
     String password = request.getParameter("password");
 
@@ -68,19 +69,13 @@ public class LoginServlet extends HttpServlet {
 
     if (akun != null) {
       if (akun.getRole().equals("customer")) {
-        HttpSession session = request.getSession();
         System.out.println("Sesi Login : " + session.getId());
         session.setAttribute("akun", akun);
         session.setAttribute("username", akun.getUsername());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/home");
         dispatcher.forward(request, response);
       } else {
-        HttpSession session = request.getSession();
-        System.out.println("Sesi Login : " + session.getId());
-        session.setAttribute("akun", akun);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(
-          "WEB-INF/views/adminhome.jsp"
-        );
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/adminhome.jsp");
         dispatcher.forward(request, response);
       }
     } else {
