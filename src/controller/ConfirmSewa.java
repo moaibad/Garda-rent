@@ -52,7 +52,7 @@ public class ConfirmSewa extends HttpServlet {
     doGet(request, response);
 
     HttpSession session = request.getSession();
-    System.out.println("Sesi Login 3: " + session.getId());
+    System.out.println("Sesi Login 3: " + request.getSession().getId());
 
     Mobil mobil = new Mobil();
     mobil = (Mobil) session.getAttribute("mobil");

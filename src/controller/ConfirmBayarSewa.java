@@ -53,8 +53,12 @@ public class ConfirmBayarSewa extends HttpServlet {
 		pembayaran.setNominal(Integer.parseInt(request.getParameter("nominal")));
 		pembayaran.setSewa_id(sewa.getId());
 		
+		System.out.println(pembayaran.getSewa_id());
+		
 		try {
 			sewaDao.tambahPembayaran(pembayaran);
+			String cek = sewaDao.cekPembayaran(pembayaran.getSewa_id());
+			System.out.println(cek);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

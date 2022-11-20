@@ -15,7 +15,7 @@ import model.Sewa;
 public class SewaDao {
 
   public int tambahSewa(Sewa sewa) throws ClassNotFoundException {
-    String sql = "{call tambahSewa (?, ?, ?, ?, ?, ?, ?, ?)}";
+    String sql = "{call tambahSewa (?, ?, ?, ?, ?, ?, ?)}";
 
     Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -31,7 +31,6 @@ public class SewaDao {
       callableStatement.setString(5, sewa.getKtp());
       callableStatement.setString(6, sewa.getAlamat());
       callableStatement.setString(7, sewa.getTelepon());
-      callableStatement.setString(8, sewa.getNama());
       System.out.println(callableStatement);
       callableStatement.executeUpdate();
       connection.close();
@@ -72,7 +71,10 @@ public class SewaDao {
 	  }
   
   public Sewa tampil_sewa(String id) throws ClassNotFoundException {
-	    String sql = "select * from sewa where id=?";
+	    String sql = "SELECT sewa.*, akun.nama as nama "
+	    		+ "FROM sewa INNER JOIN akun "
+	    		+ "ON sewa.customer_id=akun.id "
+	    		+ "WHERE sewa.id = ?";
 
 	    ResultSet result = null;
 
@@ -134,10 +136,11 @@ public class SewaDao {
 	        "jdbc:oracle:thin:@localhost:1521:xe","TEST","123");
 	      // Step 2:Create a statement using connection object
 	      PreparedStatement preparedStatement = connection.prepareCall(
-	    		"SELECT sewa.*, mobil.nama as nama_mobil " + 
-	    		"FROM sewa " + 
-	    		"INNER JOIN mobil ON sewa.mobil_id=mobil.id " + 
-	    		"WHERE sewa.customer_id = ?")) {
+	    		"SELECT sewa.*, mobil.nama as nama_mobil,akun.nama as nama_akun "
+	    		+ "FROM sewa "
+	    		+ "INNER JOIN mobil ON sewa.mobil_id=mobil.id "
+	    		+ "INNER JOIN akun on sewa.customer_id = akun.id "
+	    		+ "WHERE sewa.customer_id = ?")) {
 	      preparedStatement.setString(1, customer_id);
 	      
 	      ResultSet rs = preparedStatement.executeQuery();
@@ -145,7 +148,7 @@ public class SewaDao {
 	      while (rs.next()) {
 				Sewa sewa= new Sewa();
 				sewa.setId(rs.getString("id"));
-				sewa.setNama(rs.getString("nama"));
+				sewa.setNama(rs.getString("nama_akun"));
 				sewa.setTotal_bayar(rs.getInt("total_bayar"));
 				sewa.setLama_sewa(rs.getInt("lama_sewa"));
 				sewa.setStatus(rs.getString("status"));
@@ -199,6 +202,46 @@ public class SewaDao {
 	        preparedStatement.close();
 	        connection.close();
 	        return null;
+	      }
+	    } catch (Exception e) {
+	      // process sql exception
+	      e.printStackTrace();
+	    }
+	    return null;
+	  }
+  
+  public String cekPembayaran(String sewa_id) throws ClassNotFoundException {
+	    String sql = "select * from pembayaran where sewa_id = ?";
+
+	    ResultSet result = null;
+
+	    Class.forName("oracle.jdbc.driver.OracleDriver");
+
+	    try (
+	      Connection connection = DriverManager.getConnection(
+	        "jdbc:oracle:thin:@localhost:1521:xe",
+	        "TEST",
+	        "123"
+	      );
+	      // Step 2:Create a statement using connection object
+	      PreparedStatement preparedStatement = connection.prepareCall(sql)
+	    ) {
+
+	      // Step 3: Execute the query or update query
+	    	preparedStatement.setString(1, sewa_id);
+	      result = preparedStatement.executeQuery();
+
+	      if (result.next()) {
+	        result.close();
+	        preparedStatement.close();
+	        connection.close();
+	        return "Berhasil";
+	        
+	      } else {
+	        result.close();
+	        preparedStatement.close();
+	        connection.close();
+	        return "Gagal";
 	      }
 	    } catch (Exception e) {
 	      // process sql exception
