@@ -4,6 +4,8 @@ import dao.SewaDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -67,7 +69,18 @@ public class ConfirmSewa extends HttpServlet {
     String nama = request.getParameter("nama");
     String telepon = request.getParameter("no_tlp");
     int lama_sewa = (Integer.parseInt(request.getParameter("lama_sewa")));
-
+    
+    java.util.Date date = null;
+	try {
+		date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("tanggal"));
+	} catch (ParseException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	
+	
+    java.sql.Date tanggal_sewa = new java.sql.Date(date.getTime());
+    
     Sewa sewa = new Sewa();
 
     sewa.setHarga(harga);
@@ -78,7 +91,10 @@ public class ConfirmSewa extends HttpServlet {
     sewa.setKtp(ktp);
     sewa.setNama(nama);
     sewa.setTelepon(telepon);
+    sewa.setTanggal_sewa(tanggal_sewa);
+    sewa.setTgl_sewa(tanggal_sewa.toString());
     
+    System.out.println("Tanggal : " + sewa.getTgl_sewa());
     try {
       sewaDao.tambahSewa(sewa);
       sewa.setId(sewaDao.getSewaId());

@@ -77,7 +77,7 @@ pageEncoding="ISO-8859-1"%> <%@include file="/header.jsp" %>
               <input
                 type="date"
                 name="tanggal"
-                id=""
+                id="minDate"
                 required
                 class="form-control"
                 placeholder="Nama Anda"

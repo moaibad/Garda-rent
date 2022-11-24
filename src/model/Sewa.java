@@ -15,9 +15,27 @@ public class Sewa {
   private String telepon;
   private String status;
   private String nama_mobil;
+  private String tgl_sewa;
+  private java.sql.Date tanggal_sewa;
+  
+  
+  
+public String getTgl_sewa() {
+	return tgl_sewa;
+}
 
-  
-  
+public void setTgl_sewa(String tgl_sewa) {
+	this.tgl_sewa = tgl_sewa;
+}
+
+public java.sql.Date getTanggal_sewa() {
+	return tanggal_sewa;
+}
+
+public void setTanggal_sewa(java.sql.Date tanggal_sewa) {
+	this.tanggal_sewa = tanggal_sewa;
+}
+
 public String getNama_mobil() {
 	return nama_mobil;
 }

@@ -70,7 +70,7 @@ if(booking!=null) { // Means session is not there
             <tr>
               <td>Tanggal Sewa</td>
               <td>:</td>
-              <td>-</td>
+              <td>${sessionScope['sewa'].tgl_sewa}</td>
             </tr>
             <tr>
               <td>Lama Sewa</td>
