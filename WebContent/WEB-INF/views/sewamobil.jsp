@@ -68,8 +68,8 @@ pageEncoding="ISO-8859-1"%> <%@include file="/header.jsp" %>
 					</div>
 				<%}else {%>
 					<select id="supir" name="supir" class="form-control">
-					  <option value = "dengan_supir">Dengan Supir</option>
-					  <option value = "tanpa_supir">Tanpa Supir</option>
+					  <option value = "iya">Dengan Supir</option>
+					  <option value = "tidak">Tanpa Supir</option>
 					</select>
 				<%}%>  
 				             

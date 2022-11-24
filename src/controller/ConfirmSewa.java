@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import model.Akun;
 import model.Mobil;
 import model.Sewa;
+import model.Supir;
 
 /**
  * Servlet implementation class ConfirmSewa
@@ -60,6 +61,8 @@ public class ConfirmSewa extends HttpServlet {
     mobil = (Mobil) session.getAttribute("mobil");
     Akun akun = new Akun();
     akun = (Akun) session.getAttribute("akun");
+    Supir supir = new Supir();
+    supir = (Supir) session.getAttribute("supir");
 
     int harga = mobil.getHarga();
     String mobil_id = mobil.getId();
@@ -68,6 +71,8 @@ public class ConfirmSewa extends HttpServlet {
     String ktp = request.getParameter("ktp");
     String nama = request.getParameter("nama");
     String telepon = request.getParameter("no_tlp");
+    String denganSupir = request.getParameter("supir");
+    
     int lama_sewa = (Integer.parseInt(request.getParameter("lama_sewa")));
     
     java.util.Date date = null;
@@ -94,7 +99,16 @@ public class ConfirmSewa extends HttpServlet {
     sewa.setTanggal_sewa(tanggal_sewa);
     sewa.setTgl_sewa(tanggal_sewa.toString());
     
-    System.out.println("Tanggal : " + sewa.getTgl_sewa());
+    if(denganSupir != null) {
+    	if(denganSupir.equals("iya")) {
+        	sewa.setSupir_id(supir.getId());
+        	System.out.println(supir.getId());
+        }
+        else {
+        	sewa.setSupir_id(null);
+        }
+    }    
+    
     try {
       sewaDao.tambahSewa(sewa);
       sewa.setId(sewaDao.getSewaId());

@@ -7,6 +7,7 @@ public class Sewa {
   private int total_bayar;
   private String mobil_id;
   private String customer_id;
+  private String supir_id;
   private String tanggal_transaksi;
   private int lama_sewa;
   private String ktp;
@@ -20,6 +21,14 @@ public class Sewa {
   
   
   
+public String getSupir_id() {
+	return supir_id;
+}
+
+public void setSupir_id(String supir_id) {
+	this.supir_id = supir_id;
+}
+
 public String getTgl_sewa() {
 	return tgl_sewa;
 }

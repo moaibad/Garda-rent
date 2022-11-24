@@ -15,7 +15,7 @@ import model.Sewa;
 public class SewaDao {
 
   public int tambahSewa(Sewa sewa) throws ClassNotFoundException {
-    String sql = "{call tambahSewa (?, ?, ?, ?, ?, ?, ?, ?)}";
+    String sql = "{call tambahSewa (?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
     Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -32,6 +32,7 @@ public class SewaDao {
       callableStatement.setString(6, sewa.getAlamat());
       callableStatement.setString(7, sewa.getTelepon());
       callableStatement.setDate(8, sewa.getTanggal_sewa());
+      callableStatement.setString(9, sewa.getSupir_id());
       System.out.println(callableStatement);
       callableStatement.executeUpdate();
       connection.close();
@@ -107,6 +108,7 @@ public class SewaDao {
 	        sewa.setKtp(result.getString("ktp"));
 	        sewa.setTelepon(result.getString("telepon"));
 	        sewa.setNama(result.getString("nama"));
+	        sewa.setSupir_id(result.getString("supir_id"));
 	        sewa.setTgl_sewa(result.getDate("tanggal_sewa").toString());
 	        
 	        result.close();
