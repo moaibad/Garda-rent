@@ -1,4 +1,21 @@
 <%@include file="header.jsp" %>
+
+<%
+String login = (String)session.getAttribute("login");
+
+if(login!=null) { // Means session is not there
+%>
+<script>alert("Silahkan login!");</script>
+<%session.removeAttribute("login");
+}
+%>
+
+<style>
+body{
+    min-height: 100vh;
+}
+</style>
+
 <body>
 	<div style="padding-top:50px;padding-bottom:50px" align="center">
 		<div class="col-sm-3">
@@ -29,7 +46,13 @@
 	    	</div>
 		</div>
 	</div>
-</body>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
 
 <!-- Modal -->
 <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">

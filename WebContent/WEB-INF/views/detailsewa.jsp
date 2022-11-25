@@ -63,7 +63,7 @@ if(booking!=null) { // Means session is not there
               <td>${sessionScope['sewa'].nama}</td>
             </tr>
             <tr>
-              <td>telepon</td>
+              <td>Telepon</td>
               <td>:</td>
               <td>${sessionScope['sewa'].telepon}</td>
             </tr>

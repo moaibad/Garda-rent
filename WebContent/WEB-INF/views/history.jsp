@@ -3,6 +3,16 @@ pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.util.List"%>
 <%@page import="model.Sewa"%>
+
+<%
+String username = (String)session.getAttribute("username");
+
+if(username==null) { // Means session is not there
+session.setAttribute("login","login");%>
+<jsp:forward page="/index.jsp" />
+<%}%>
+
+
 <%@include file="/header.jsp" %>
 
 <br>
@@ -40,7 +50,7 @@ pageEncoding="ISO-8859-1"%>
                             <td><%=sewa.getId()%></td>
                             <td><%=sewa.getNama_mobil()%></td>
                             <td><%=sewa.getNama()%></td>
-                            <td></td>
+                            <td><%=sewa.getTgl_sewa()%></td>
                             <td><%=sewa.getLama_sewa()%> Hari</td>
                             <td>Rp. <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "<%=sewa.getTotal_bayar()%>" />,-</td>
                             <td><%=sewa.getStatus()%></td>
@@ -56,6 +66,10 @@ pageEncoding="ISO-8859-1"%>
     </div>
 </div>
 </div>
+
+<br>
+
+<br>
 
 <br>
 

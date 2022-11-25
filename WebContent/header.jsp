@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@page import="model.Akun"%>
 
 <!doctype html>
 <html>
@@ -11,7 +13,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.css" >
-    <link rel="stylesheet" href="assets/css/font-awesome.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
   </head>
@@ -43,5 +45,19 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="http://localhost:8081/Garda-rent/history?id=${sessionScope['akun'].id}">History</a>
                 </li>
+              </ul>
+                <% Akun akun = (Akun)session.getAttribute("akun");
+                if(akun != null){%>
+	            <ul class="navbar-nav my-2 my-lg-0">
+	                <li class="nav-item">
+	                    <a class="nav-link" href="#">
+	                        <i class="fa fa-user"> </i> Hallo, ${sessionScope['akun'].nama}
+	                    </a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" onclick="return confirm('Apakah anda ingin logout ?');" href="http://localhost:8081/Garda-rent/logout">Logout</a>
+	                </li>
+	            </ul>
+	            <% }%>
         </div>
     </nav>

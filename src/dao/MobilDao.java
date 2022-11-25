@@ -24,7 +24,7 @@ public class MobilDao {
 	        "jdbc:oracle:thin:@localhost:1521:xe","TEST","123");
 	      // Step 2:Create a statement using connection object
 	      PreparedStatement preparedStatement = connection.prepareCall(
-	    		"SELECT * from mobil WHERE status = 'Tersedia'")) {
+	    		"SELECT * from mobil")) {
 	      
 	      
 	      ResultSet rs = preparedStatement.executeQuery();
@@ -39,6 +39,7 @@ public class MobilDao {
 				mobil.setMerek(rs.getString("merek"));
 				mobil.setKapasitas(rs.getInt("kapasitas"));
 				mobil.setHarga(rs.getInt("harga"));
+				mobil.setStatus(rs.getString("status"));
 				listMobil.add(mobil);
 			}
 	      

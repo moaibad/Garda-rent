@@ -15,7 +15,7 @@ import model.Sewa;
 public class SewaDao {
 
   public int tambahSewa(Sewa sewa) throws ClassNotFoundException {
-    String sql = "{call tambahSewa (?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+    String sql = "{call TAMBAHSEWA (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
     Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -33,10 +33,19 @@ public class SewaDao {
       callableStatement.setString(7, sewa.getTelepon());
       callableStatement.setDate(8, sewa.getTanggal_sewa());
       callableStatement.setString(9, sewa.getSupir_id());
+      callableStatement.registerOutParameter(10, java.sql.Types.INTEGER);
       System.out.println(callableStatement);
       callableStatement.executeUpdate();
       connection.close();
       callableStatement.close();
+      int result = callableStatement.getInt(10);
+      
+      if (result == 0) {
+    	  System.out.println("Data tidak berhasil dimasukkan");
+      }
+      else {
+    	  System.out.println("Data berhasil dimasukkan");
+      }
       // Step 3: Execute the query or update query
     } catch (Exception e) {
       // process sql exception
@@ -158,6 +167,7 @@ public class SewaDao {
 				sewa.setStatus(rs.getString("status"));
 				sewa.setMobil_id(rs.getString("mobil_id"));
 				sewa.setNama_mobil(rs.getString("nama_mobil"));
+				sewa.setTgl_sewa(rs.getDate("tanggal_sewa").toString());
 				listSewa.add(sewa);
 			}
 	      
