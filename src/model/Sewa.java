@@ -18,9 +18,18 @@ public class Sewa {
   private String nama_mobil;
   private String tgl_sewa;
   private java.sql.Date tanggal_sewa;
+  private String estimasi_selesai;
   
+
   
-  
+public String getEstimasi_selesai() {
+	return estimasi_selesai;
+}
+
+public void setEstimasi_selesai(String estimasi_selesai) {
+	this.estimasi_selesai = estimasi_selesai;
+}
+
 public String getSupir_id() {
 	return supir_id;
 }

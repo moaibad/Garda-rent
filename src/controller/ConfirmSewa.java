@@ -72,6 +72,7 @@ public class ConfirmSewa extends HttpServlet {
     String nama = request.getParameter("nama");
     String telepon = request.getParameter("no_tlp");
     String denganSupir = request.getParameter("supir");
+    int valid = 0;
     
     int lama_sewa = (Integer.parseInt(request.getParameter("lama_sewa")));
     
@@ -110,7 +111,7 @@ public class ConfirmSewa extends HttpServlet {
     }    
     
     try {
-      sewaDao.tambahSewa(sewa);
+      valid = sewaDao.tambahSewa(sewa);
       sewa.setId(sewaDao.getSewaId());
     } catch (ClassNotFoundException e) {
       // TODO Auto-generated catch block
@@ -119,7 +120,16 @@ public class ConfirmSewa extends HttpServlet {
     
     session.setAttribute("sewa", sewa);
     session.setAttribute("booking", "booking");
-    response.sendRedirect("/Garda-rent/detailsewa?id="+sewa.getId());
+    
+    if (valid == 0) {
+    	PrintWriter out = response.getWriter();
+    	session.setAttribute("tanggal", "tanggal");
+    	response.sendRedirect("/Garda-rent/sewa?id="+mobil.getId());
+    }
+    else {
+    	response.sendRedirect("/Garda-rent/detailsewa?id="+sewa.getId());
+    }
+    
   }
   
 }

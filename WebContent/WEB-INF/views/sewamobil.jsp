@@ -4,6 +4,26 @@ pageEncoding="ISO-8859-1"%> <%@include file="/header.jsp" %>
 <%@page import="java.util.List"%>
 <%@page import="model.Supir"%>
 
+
+<%
+String username = (String)session.getAttribute("username");
+
+if(username==null) { // Means session is not there
+session.setAttribute("login","login");%>
+<jsp:forward page="/index.jsp" />
+<%}%>
+
+
+<%
+String tanggal = (String)session.getAttribute("tanggal");
+
+if(tanggal!=null) { // Means session is not there
+%>
+<script>alert("Silahkan masukan tanggal yang sesuai!");</script>
+<%session.removeAttribute("tanggal");
+}
+%>
+
 <br />
 <br />
 <div class="container">

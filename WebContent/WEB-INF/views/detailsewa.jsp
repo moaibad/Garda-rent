@@ -3,6 +3,15 @@ pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/header.jsp" %>
 
+
+<%
+String username = (String)session.getAttribute("username");
+
+if(username==null) { // Means session is not there
+session.setAttribute("login","login");%>
+<jsp:forward page="/index.jsp" />
+<%}%>
+
 <%
 String booking = (String)session.getAttribute("booking");
 
@@ -76,6 +85,11 @@ if(booking!=null) { // Means session is not there
               <td>Lama Sewa</td>
               <td>:</td>
               <td>${sessionScope['sewa'].lama_sewa} hari</td>
+            </tr>
+            <tr>
+              <td>Estimasi Selesai</td>
+              <td>:</td>
+              <td>${sessionScope['sewa'].estimasi_selesai}</td>
             </tr>
             <tr>
               <td>Total Harga</td>

@@ -18,7 +18,7 @@ public class SewaDao {
     String sql = "{call TAMBAHSEWA (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
     Class.forName("oracle.jdbc.driver.OracleDriver");
-
+    int result = 0;
     try (
       Connection connection = DriverManager.getConnection(
         "jdbc:oracle:thin:@localhost:1521:xe","TEST","123");
@@ -38,20 +38,14 @@ public class SewaDao {
       callableStatement.executeUpdate();
       connection.close();
       callableStatement.close();
-      int result = callableStatement.getInt(10);
-      
-      if (result == 0) {
-    	  System.out.println("Data tidak berhasil dimasukkan");
-      }
-      else {
-    	  System.out.println("Data berhasil dimasukkan");
-      }
+      result = callableStatement.getInt(10);
+      return result;
       // Step 3: Execute the query or update query
     } catch (Exception e) {
       // process sql exception
       e.printStackTrace();
     }
-    return 0;
+    return result;
   }
   
   public int tambahPembayaran(Pembayaran pembayaran) throws ClassNotFoundException {
@@ -119,6 +113,7 @@ public class SewaDao {
 	        sewa.setNama(result.getString("nama"));
 	        sewa.setSupir_id(result.getString("supir_id"));
 	        sewa.setTgl_sewa(result.getDate("tanggal_sewa").toString());
+	        sewa.setEstimasi_selesai(result.getDate("tanggal_kembali").toString());
 	        
 	        result.close();
 	        preparedStatement.close();

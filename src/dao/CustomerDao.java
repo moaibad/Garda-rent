@@ -12,14 +12,14 @@ import java.sql.Connection;
 public class CustomerDao {
     
 	public int registerCustomer(Customer customer) throws ClassNotFoundException {
-        String sql = "{call registrasiCustomer (?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call registrasiCustomer (?, ?, ?, ?, ?, ?)}";
         
         int result = 0;
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
         try (Connection connection = DriverManager
-            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TUBES", "tubes");
+            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "TEST", "123");
 
             // Step 2:Create a statement using connection object
             CallableStatement callableStatement = connection.prepareCall(sql)){
@@ -29,8 +29,6 @@ public class CustomerDao {
     		callableStatement.setString(4, customer.getKtp());
     		callableStatement.setString(5, customer.getSim());
     		callableStatement.setString(6, customer.getTelp());
-    		callableStatement.setString(7, customer.getRole());
-
 
             System.out.println(callableStatement);
             
@@ -70,7 +68,6 @@ public class CustomerDao {
             	customer.setKtp(result.getString("ktp"));
             	customer.setSim(result.getString("sim"));
             	customer.setTelp(result.getString("telp"));
-            	customer.setRole(result.getString("role"));
             	result.close();
             	preparedStatement.close();
             	connection.close();
@@ -93,3 +90,4 @@ public class CustomerDao {
     }
 	
 }
+
