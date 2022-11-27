@@ -1,5 +1,15 @@
 <%@include file="header.jsp" %>
 
+
+<%
+String username = (String)session.getAttribute("username");
+
+if(username!=null) { // Means session is not there
+session.setAttribute("login","login");%>
+<jsp:forward page="/WEB-INF/views/customerhome.jsp" />
+<%}%>
+
+
 <%
 String login = (String)session.getAttribute("login");
 

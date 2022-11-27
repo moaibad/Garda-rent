@@ -76,7 +76,7 @@ public class LoginServlet extends HttpServlet {
         dispatcher.forward(request, response);
       } else {
     	session.setAttribute("akun", akun);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/adminhome.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/admin/adminhome.jsp");
         dispatcher.forward(request, response);
       }
     } else {

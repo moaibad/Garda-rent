@@ -52,7 +52,7 @@ session.setAttribute("login","login");%>
                     </div>
                 </div>
             </div>
-        <% } %> 
+        <%}%> 
         </div>
     </div>
 </div>
