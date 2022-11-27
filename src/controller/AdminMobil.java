@@ -1,29 +1,34 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import dao.SewaDao;
-import model.Akun;
-import model.Pembayaran;
+import dao.MobilDao;
+import model.Mobil;
 import model.Sewa;
 
 /**
- * Servlet implementation class ConfirmBayarSewa
+ * Servlet implementation class AdminMobil
  */
-@WebServlet("/confirmbayar")
-public class ConfirmBayarSewa extends HttpServlet {
+@WebServlet("/adminmobil")
+public class AdminMobil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	SewaDao sewaDao = new SewaDao();
+	
+	MobilDao mobilDao = new MobilDao();
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConfirmBayarSewa() {
+    public AdminMobil() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +39,20 @@ public class ConfirmBayarSewa extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		HttpSession session = request.getSession();
+	    List<Mobil> listMobil = new ArrayList<Mobil>();
+	    
+	    try {
+			listMobil = mobilDao.list_mobil();
+			session.setAttribute("listMobil", listMobil);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/admin/daftarmobil.jsp");
+        dispatcher.forward(request, response);
 	}
 
 	/**
@@ -42,27 +61,6 @@ public class ConfirmBayarSewa extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
-		
-		Sewa sewa = new Sewa();
-	    sewa = (Sewa) request.getSession().getAttribute("sewa");
-	    
-		Pembayaran pembayaran = new Pembayaran();
-		
-		pembayaran.setRekening(request.getParameter("rekening"));
-		pembayaran.setNominal(Integer.parseInt(request.getParameter("nominal")));
-		pembayaran.setSewa_id(sewa.getId());
-		
-		System.out.println(pembayaran.getSewa_id());
-		
-		try {
-			sewaDao.tambahPembayaran(pembayaran);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		response.sendRedirect("/Garda-rent/home");
 	}
 
 }

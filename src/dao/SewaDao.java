@@ -219,7 +219,7 @@ public class SewaDao {
 	    return null;
 	  }
   
-  public String cekPembayaran(String sewa_id) throws ClassNotFoundException {
+  public Pembayaran tampil_pembayaran(String sewa_id) throws ClassNotFoundException {
 	    String sql = "select * from pembayaran where sewa_id = ?";
 
 	    ResultSet result = null;
@@ -238,26 +238,34 @@ public class SewaDao {
 
 	      // Step 3: Execute the query or update query
 	    	preparedStatement.setString(1, sewa_id);
-	      result = preparedStatement.executeQuery();
+	    	result = preparedStatement.executeQuery();
 
+	      
 	      if (result.next()) {
-	        result.close();
-	        preparedStatement.close();
-	        connection.close();
-	        return "Berhasil";
-	        
-	      } else {
-	        result.close();
-	        preparedStatement.close();
-	        connection.close();
-	        return "Gagal";
-	      }
-	    } catch (Exception e) {
-	      // process sql exception
-	      e.printStackTrace();
-	    }
-	    return null;
-	  }
+		    	Pembayaran pembayaran = new Pembayaran();
+		        pembayaran.setId(result.getString("id"));
+		        pembayaran.setRekening(result.getString("rekening"));
+		        pembayaran.setTanggal(result.getDate("tanggal").toString());
+		        pembayaran.setNominal(result.getInt("nominal"));
+		        pembayaran.setSewa_id(result.getString("sewa_id"));
+		        
+		        result.close();
+		        preparedStatement.close();
+		        connection.close();
+		        return pembayaran;
+		      } else {
+		        System.out.println("Login Failed!");
+		        result.close();
+		        preparedStatement.close();
+		        connection.close();
+		        return null;
+		      }
+		    } catch (Exception e) {
+		      // process sql exception
+		      e.printStackTrace();
+		    }
+		    return null;
+		  }
 }
 
 

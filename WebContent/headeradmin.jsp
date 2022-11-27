@@ -37,7 +37,7 @@
                     <a class="nav-link" href="http://localhost:8081/Garda-rent/adminuser">User</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="daftarmobil.jsp">Daftar Mobil</a>
+                    <a class="nav-link" href="http://localhost:8081/Garda-rent/adminmobil">Daftar Mobil</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="http://localhost:8081/Garda-rent/adminsewa">Daftar Booking</a>

@@ -41,9 +41,9 @@
 							<td><%=sewa.getNama()%></td>
 							<td><%=sewa.getLama_sewa()%> hari</td>
 							<td><%=sewa.getStatus()%></td>
-							<td>Rp. <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "<%=sewa.getTotal_bayar()%>"/></td>
+							<td>Rp. <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "<%=sewa.getTotal_bayar()%>"/>,-</td>
                             <td>
-                                <a class="btn btn-primary" href="bayar.jsp"
+                                <a class="btn btn-primary" href="http://localhost:8081/Garda-rent/admindetailsewa?id=<%=sewa.getId()%>"
                                 role="button">Detail</a>   
                             </td>
                         </tr>

@@ -55,7 +55,7 @@ pageEncoding="ISO-8859-1"%>
                         </tr>
                     </table>
                     <input type="hidden" name="sewa_id" value="${sessionScope['sewa'].id}">
-                    <button type="submit" class="btn btn-primary float-right">Kirim</button>
+                    <button type="submit" class="btn btn-primary float-right" onclick="return confirm('Apakah anda ingin konfirmasi pembayaran?');">Kirim</button>
                </form>
            </div>
          </div> 
