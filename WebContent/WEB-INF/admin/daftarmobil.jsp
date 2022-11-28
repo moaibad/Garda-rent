@@ -50,8 +50,8 @@
 							<td><%=mobil.getStatus()%></td>
 							<td><%=mobil.getTahun()%></td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="edit.jsp" role="button">Edit</a>  
-                                <a class="btn btn-danger  btn-sm" href="proses.php?aksi=hapus&id=<?= $isi['id_mobil'];?>&gambar=<?= $isi['gambar'];?>" role="button">Hapus</a>  
+                                <a class="btn btn-primary btn-sm" href="http://localhost:8081/Garda-rent/admineditmobil?id=<%=mobil.getId()%>" role="button">Edit</a>  
+                                <a class="btn btn-danger  btn-sm" href="" role="button">Hapus</a>  
                             </td>
                         </tr>
                         <%}%>
@@ -64,3 +64,4 @@
 </div>
 </body>
 </html>
+<%@include file="/footer.jsp" %>

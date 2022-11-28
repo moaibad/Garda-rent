@@ -86,7 +86,7 @@
                 </li>
             </ul>
             <div class="card-footer">
-                <a href="<?php echo $url;?>admin/peminjaman/peminjaman.php?id=<?php echo $hasil['kode_booking'];?>" 
+                <a href="" 
                     class="btn btn-success btn-md">Ubah Status Peminjaman</a>
             </div>
         </div>
@@ -148,7 +148,7 @@
                             </td>
                         </tr>
                     </table>
-                    <input type="hidden" name="id_booking" value="<?php echo $hasil['id_booking'];?>">
+                    <input type="hidden" name="id_booking" value="">
                     <button type="submit" class="btn btn-primary float-right">
                         Ubah Status
                     </button>

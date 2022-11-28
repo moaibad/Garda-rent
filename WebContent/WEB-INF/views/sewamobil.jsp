@@ -50,7 +50,7 @@ if(tanggal!=null) { // Means session is not there
     <div class="col-sm-8">
       <div class="card">
         <div class="card-body">
-          <form method="post"action="<%= request.getContextPath() %>/confirmSewa">
+          <form method="post" action="<%= request.getContextPath() %>/confirmSewa">
             <div class="form-group">
               <label for="">KTP</label>
               <input type="text" name="ktp" id="" required class="form-control" placeholder="KTP / NIK Anda" />
@@ -95,7 +95,7 @@ if(tanggal!=null) { // Means session is not there
 				             
             </div>
             <hr />
-            <button type="submit" class="btn btn-primary float-right">
+            <button type="submit" class="btn btn-primary float-right" onclick="return confirm('Apakah anda ingin konfirmasi sewa ?');"/>
               Booking Now
             </button>
           </form>

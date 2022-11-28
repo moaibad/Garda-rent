@@ -49,7 +49,7 @@
              <ul class="navbar-nav my-2 my-lg-0">
              <li class="nav-item">
              	<a class ="nav-link" href="#">
-             		<i class="fa fa-user"></i><h4>Hallo, ${sessionScope['akun'].nama}</h4>
+             		<i class="fa fa-user"></i><h7> Hallo, ${sessionScope['akun'].nama}</h7>
              	</a>
              </li>
              <li class="nav-item">
