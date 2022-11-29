@@ -36,9 +36,9 @@ public class SewaDao {
       callableStatement.registerOutParameter(10, java.sql.Types.INTEGER);
       System.out.println(callableStatement);
       callableStatement.executeUpdate();
+      result = callableStatement.getInt(10);
       connection.close();
       callableStatement.close();
-      result = callableStatement.getInt(10);
       return result;
       // Step 3: Execute the query or update query
     } catch (Exception e) {
