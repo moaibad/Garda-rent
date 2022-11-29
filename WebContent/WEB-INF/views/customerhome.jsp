@@ -23,7 +23,7 @@ session.setAttribute("login","login");%>
 		%>
             <div class="col-sm-4" style="padding-bottom:25px">
                 <div class="card">
-                <img src="" class="card-img-top" style="height:200px;object-fit:cover;">
+                <img src="assets/image/<%=mobil.getId()%>.jpg" class="card-img-top" style="height:200px;object-fit:cover;">
                     <div class="card-body" style="background:#ddd">
                         <h5 class="card-title"><%=mobil.getNama()%></h5>
                     </div>

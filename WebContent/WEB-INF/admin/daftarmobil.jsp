@@ -19,7 +19,7 @@
             <h4 class="card-title">
                 Daftar Mobil
                 <div class="float-right">
-                    <a class="btn btn-success" href="tambahmobil.jsp" role="button">Tambah</a>
+                    <a class="btn btn-success" href="http://localhost:8081/Garda-rent/admintambahmobil" role="button">Tambah</a>
                 </div>
             </h4>
         </div>
@@ -43,7 +43,7 @@
 						%>
                         <tr>
                             <td><%=mobil.getId()%></td>
-							<td><%=mobil.getPlat()%></td>
+							<td><img src="assets/image/<%=mobil.getId()%>.jpg" class="img-fluid" style="width:200px;"></td>
 							<td><%=mobil.getMerek()%></td>
 							<td><%=mobil.getPlat()%></td>
 							<td>Rp. <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "<%=mobil.getHarga()%>"/>,-</td>

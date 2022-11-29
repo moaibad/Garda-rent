@@ -30,7 +30,7 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
- 		       <li class="nav-item active">
+ 		       <li class="nav-item active"> <!-- http://localhost:8081/Garda-rent/adminhome -->
                     <a class="nav-link" href="http://localhost:8081/Garda-rent/adminhome">Home<span class="sr-only">(current)</span></a>
                 </li>	
                 <li class="nav-item active">

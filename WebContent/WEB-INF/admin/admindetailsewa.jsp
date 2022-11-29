@@ -60,29 +60,13 @@
         </div>
         <br/>
         <div class="card">
+        <img src="assets/image/${sessionScope['mobil'].id}.jpg" class="card-img-top" style="height:200px;object-fit:cover;">
             <div class="card-header">
                 <h5 class="card-title">${sessionScope['mobil'].nama}</h5>
             </div>
             <ul class="list-group list-group-flush">
-
-                <?php if($isi['status'] == 'Tersedia'){?>
-
-                    <li class="list-group-item bg-primary text-white">
-                        <i class="fa fa-check"></i> Available
-                    </li>
-
-                <?php }else{?>
-
-                    <li class="list-group-item bg-danger text-white">
-                        <i class="fa fa-close"></i> Not Available
-                    </li>
-
-                <?php }?>
-            
-            
-                <li class="list-group-item bg-info text-white"><i class="fa fa-check"></i> Free E-toll 50k</li>
                 <li class="list-group-item bg-dark text-white">
-                    <i class="fa fa-money"></i> Rp. <?php echo number_format($isi['harga']);?>/ day
+                    <i class="fa fa-money"></i> <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${sessionScope['mobil'].harga}"/>,- / day
                 </li>
             </ul>
             <div class="card-footer">
