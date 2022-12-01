@@ -11,8 +11,28 @@ public class Mobil {
   private int kapasitas;
   private int harga;
   private String status;
+  private int km;
+  private String warna;
+  
+  
 
-  public String getId() {
+  public int getKm() {
+	return km;
+}
+
+public void setKm(int km) {
+	this.km = km;
+}
+
+public String getWarna() {
+	return warna;
+}
+
+public void setWarna(String warna) {
+	this.warna = warna;
+}
+
+public String getId() {
     return id;
   }
 

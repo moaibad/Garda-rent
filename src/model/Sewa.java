@@ -11,6 +11,7 @@ public class Sewa {
   private String tanggal_transaksi;
   private int lama_sewa;
   private String ktp;
+  private String sim;
   private String nama;
   private String alamat;
   private String telepon;
@@ -22,6 +23,14 @@ public class Sewa {
   
 
   
+public String getSim() {
+	return sim;
+}
+
+public void setSim(String sim) {
+	this.sim = sim;
+}
+
 public String getEstimasi_selesai() {
 	return estimasi_selesai;
 }

@@ -4,10 +4,15 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
 import dao.MobilDao;
 import model.Mobil;
@@ -16,10 +21,17 @@ import model.Mobil;
  * Servlet implementation class adminconfirmtambahmobil
  */
 @WebServlet("/adminconfirmtambahmobil")
+@MultipartConfig(
+		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
+		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
+		)
 public class AdminConfirmTambahMobil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	MobilDao mobilDao = new MobilDao();
+	
+	String mobil_id;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,8 +55,7 @@ public class AdminConfirmTambahMobil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	    
-
+		
 	    Mobil mobil = new Mobil();
 	    mobil.setPlat(request.getParameter("plat"));
 	    mobil.setNama(request.getParameter("nama"));
@@ -57,10 +68,17 @@ public class AdminConfirmTambahMobil extends HttpServlet {
 	    
 	    try {
 			mobilDao.tambah_sewa(mobil);
+			mobil_id = mobilDao.getMobilId();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	    
+	    Part filePart = request.getPart("gambar");
+	    String fileName = filePart.getSubmittedFileName();
+	    for (Part part : request.getParts()) {
+	      part.write("D:\\eclipse workspace\\Garda-rent\\WebContent\\assets\\image\\mobil\\" + mobil_id + ".jpg");
+	    }
 	    
 	    response.sendRedirect("/Garda-rent/adminmobil");
 	  }

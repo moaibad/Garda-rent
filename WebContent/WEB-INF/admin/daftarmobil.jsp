@@ -43,7 +43,7 @@
 						%>
                         <tr>
                             <td><%=mobil.getId()%></td>
-							<td><img src="assets/image/<%=mobil.getId()%>.jpg" class="img-fluid" style="width:200px;"></td>
+							<td><img src="assets/image/mobil/<%=mobil.getId()%>.jpg" class="img-fluid" style="width:200px;"></td>
 							<td><%=mobil.getMerek()%></td>
 							<td><%=mobil.getPlat()%></td>
 							<td>Rp. <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "<%=mobil.getHarga()%>"/>,-</td>

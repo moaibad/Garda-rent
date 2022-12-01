@@ -24,13 +24,14 @@ if(tanggal!=null) { // Means session is not there
 }
 %>
 
+
 <br />
 <br />
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img src="" class="card-img-top" style="height: 200px" />
+        <img src="assets/image/mobil/${sessionScope['mobil'].id}.jpg" class="card-img-top" style="height: 200px" />
         <div class="card-body" style="background: #ddd">
           <h5 class="card-title">${sessionScope['mobil'].nama}</h5>
         </div>
@@ -50,14 +51,14 @@ if(tanggal!=null) { // Means session is not there
     <div class="col-sm-8">
       <div class="card">
         <div class="card-body">
-          <form method="post" action="<%= request.getContextPath() %>/confirmSewa">
+          <form method="post" action="<%= request.getContextPath() %>/confirmSewa" enctype="multipart/form-data">
             <div class="form-group">
               <label for="">KTP</label>
-              <input type="text" name="ktp" id="" required class="form-control" placeholder="KTP / NIK Anda" />
+              <input type="file" accept="image/*" class="form-control" name="ktp" placeholder="Isi KTP">
             </div>
             <div class="form-group">
-              <label for="">Nama</label>
-              <input type="text" name="nama" id=""required class="form-control" placeholder="Nama Anda" value="${sessionScope['akun'].nama}"/>
+              <label for="">SIM</label>
+              <input type="file" accept="image/*" class="form-control" name="sim" placeholder="Isi SIM">
             </div>
             <div class="form-group">
               <label for="">Alamat</label>
@@ -65,7 +66,7 @@ if(tanggal!=null) { // Means session is not there
             </div>
             <div class="form-group">
               <label for="">Telepon</label>
-              <input type="text" name="no_tlp" id="" required class="form-control" placeholder="Telepon"/>
+              <input type="text" name="telp" id="" required class="form-control" placeholder="Telepon"/>
             </div>
             <div class="form-group">
               <label for="">Tanggal Sewa</label>

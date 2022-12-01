@@ -15,7 +15,7 @@ import model.Sewa;
 public class SewaDao {
 
   public int tambahSewa(Sewa sewa) throws ClassNotFoundException {
-    String sql = "{call TAMBAHSEWA (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+    String sql = "{call TAMBAHSEWA (?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
     Class.forName("oracle.jdbc.driver.OracleDriver");
     int result = 0;
@@ -28,15 +28,14 @@ public class SewaDao {
       callableStatement.setInt(2, sewa.getLama_sewa());
       callableStatement.setString(3, sewa.getMobil_id());
       callableStatement.setString(4, sewa.getCustomer_id());
-      callableStatement.setString(5, sewa.getKtp());
-      callableStatement.setString(6, sewa.getAlamat());
-      callableStatement.setString(7, sewa.getTelepon());
-      callableStatement.setDate(8, sewa.getTanggal_sewa());
-      callableStatement.setString(9, sewa.getSupir_id());
-      callableStatement.registerOutParameter(10, java.sql.Types.INTEGER);
+      callableStatement.setString(5, sewa.getAlamat());
+      callableStatement.setString(6, sewa.getTelepon());
+      callableStatement.setDate(7, sewa.getTanggal_sewa());
+      callableStatement.setString(8, sewa.getSupir_id());
+      callableStatement.registerOutParameter(9, java.sql.Types.INTEGER);
       System.out.println(callableStatement);
       callableStatement.executeUpdate();
-      result = callableStatement.getInt(10);
+      result = callableStatement.getInt(9);
       connection.close();
       callableStatement.close();
       return result;
@@ -206,7 +205,6 @@ public class SewaDao {
 	        return sewaId;
 	        
 	      } else {
-	        System.out.println("Login Failed!");
 	        result.close();
 	        preparedStatement.close();
 	        connection.close();

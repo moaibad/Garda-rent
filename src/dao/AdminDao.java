@@ -63,7 +63,8 @@ public class AdminDao {
 	    		  "SELECT sewa.*, mobil.nama as nama_mobil,akun.nama as nama_akun "
 		    		+ "FROM sewa "
 		    		+ "INNER JOIN mobil ON sewa.mobil_id=mobil.id "
-		    		+ "INNER JOIN akun on sewa.customer_id = akun.id ")) {
+		    		+ "INNER JOIN akun on sewa.customer_id = akun.id "
+		    		+ "order by sewa.id desc ")) {
 	      
 	      
 	      ResultSet rs = preparedStatement.executeQuery();

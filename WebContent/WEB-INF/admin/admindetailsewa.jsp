@@ -60,7 +60,7 @@
         </div>
         <br/>
         <div class="card">
-        <img src="assets/image/${sessionScope['mobil'].id}.jpg" class="card-img-top" style="height:200px;object-fit:cover;">
+        <img src="assets/image/mobil/${sessionScope['mobil'].id}.jpg" class="card-img-top" style="height:200px;object-fit:cover;">
             <div class="card-header">
                 <h5 class="card-title">${sessionScope['mobil'].nama}</h5>
             </div>
@@ -81,7 +81,7 @@
                 <h5> Detail booking</h5>
             </div>
            <div class="card-body">
-               <form method="post" action="">
+               <form method="post" action="<%= request.getContextPath() %>/adminupdatesewa">
                     <table class="table">
                         <tr>
                             <td>Kode Booking  </td>
@@ -124,10 +124,10 @@
                             <td>
                                 <select class="form-control" name="status">
                                    	<option value = "iya">${sessionScope['sewa'].status}</option>
-					  				<option value = "tidak">Lunas</option>
-					  				<option value = "tidak">Pembayaran Ditolak</option>
-					  				<option value = "tidak">Berjalan</option>
-					  				<option value = "tidak">Selesai</option>
+					  				<option value = "Lunas">Lunas</option>
+					  				<option value = "Pembayaran Ditolak">Pembayaran Ditolak</option>
+					  				<option value = "Berjalan">Berjalan</option>
+					  				<option value = "Selesai">Selesai</option>
                                 </select>    
                             </td>
                         </tr>

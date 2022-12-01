@@ -21,7 +21,7 @@
         </div>
         <div class="card-body">
             <div class="container">
-                <form method="post" action="<%= request.getContextPath() %>/adminconfirmtambahmobil">
+                <form method="post" action="<%= request.getContextPath() %>/adminconfirmtambahmobil" enctype="multipart/form-data">
                     <div class="row">
 
                         <div class="col-sm-6">

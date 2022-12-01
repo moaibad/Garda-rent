@@ -121,6 +121,8 @@ public class MobilDao {
 			mobil.setMerek(rs.getString("merek"));
 			mobil.setKapasitas(rs.getInt("kapasitas"));
 			mobil.setHarga(rs.getInt("harga"));
+			mobil.setWarna(rs.getString("warna"));
+			mobil.setKm(rs.getInt("km"));
 	        
 	        rs.close();
 	        preparedStatement.close();
@@ -129,6 +131,47 @@ public class MobilDao {
 	      } else {
 	        System.out.println("Mobil Gaada!");
 	        rs.close();
+	        preparedStatement.close();
+	        connection.close();
+	        return null;
+	      }
+	    } catch (Exception e) {
+	      // process sql exception
+	      e.printStackTrace();
+	    }
+	    return null;
+	  }
+  
+  public String getMobilId() throws ClassNotFoundException {
+	    String sql = "select id from mobil order by id desc";
+
+	    ResultSet result = null;
+
+	    Class.forName("oracle.jdbc.driver.OracleDriver");
+
+	    try (
+	      Connection connection = DriverManager.getConnection(
+	        "jdbc:oracle:thin:@localhost:1521:xe",
+	        "TEST",
+	        "123"
+	      );
+	      // Step 2:Create a statement using connection object
+	      PreparedStatement preparedStatement = connection.prepareCall(sql)
+	    ) {
+
+	      // Step 3: Execute the query or update query
+	      result = preparedStatement.executeQuery();
+
+	      if (result.next()) {
+	    	String mobil_id = result.getString("id");
+	        result.close();
+	        preparedStatement.close();
+	        connection.close();
+	        System.out.println(mobil_id);
+	        return mobil_id;
+	        
+	      } else {
+	        result.close();
 	        preparedStatement.close();
 	        connection.close();
 	        return null;

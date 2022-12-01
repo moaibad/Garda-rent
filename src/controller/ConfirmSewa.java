@@ -9,11 +9,13 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
 import model.Akun;
 import model.Mobil;
 import model.Sewa;
@@ -23,6 +25,11 @@ import model.Supir;
  * Servlet implementation class ConfirmSewa
  */
 @WebServlet("/confirmSewa")
+@MultipartConfig(
+		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
+		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
+		)
 public class ConfirmSewa extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
@@ -63,18 +70,9 @@ public class ConfirmSewa extends HttpServlet {
     akun = (Akun) session.getAttribute("akun");
     Supir supir = new Supir();
     supir = (Supir) session.getAttribute("supir");
-
-    int harga = mobil.getHarga();
-    String mobil_id = mobil.getId();
-    String customer_id = akun.getId();
-    String alamat = request.getParameter("alamat");
-    String ktp = request.getParameter("ktp");
-    String nama = request.getParameter("nama");
-    String telepon = request.getParameter("no_tlp");
     String denganSupir = request.getParameter("supir");
     int valid = 0;
-    
-    int lama_sewa = (Integer.parseInt(request.getParameter("lama_sewa")));
+   
     
     java.util.Date date = null;
 	try {
@@ -87,18 +85,18 @@ public class ConfirmSewa extends HttpServlet {
 	
     java.sql.Date tanggal_sewa = new java.sql.Date(date.getTime());
     
+    
     Sewa sewa = new Sewa();
-
-    sewa.setHarga(harga);
-    sewa.setMobil_id(mobil_id);
-    sewa.setCustomer_id(customer_id);
-    sewa.setLama_sewa(lama_sewa);
-    sewa.setAlamat(alamat);
-    sewa.setKtp(ktp);
-    sewa.setNama(nama);
-    sewa.setTelepon(telepon);
+    sewa.setHarga(mobil.getHarga());
+    sewa.setMobil_id(mobil.getId());
+    sewa.setCustomer_id(akun.getId());
+    sewa.setLama_sewa(Integer.parseInt(request.getParameter("lama_sewa")));
+    sewa.setAlamat(request.getParameter("alamat"));
+    sewa.setNama(akun.getNama());
+    sewa.setTelepon(request.getParameter("telp"));
     sewa.setTanggal_sewa(tanggal_sewa);
     sewa.setTgl_sewa(tanggal_sewa.toString());
+    
     
     if(denganSupir != null) {
     	if(denganSupir.equals("iya")) {
@@ -110,6 +108,7 @@ public class ConfirmSewa extends HttpServlet {
         }
     }    
     
+    
     try {
       valid = sewaDao.tambahSewa(sewa);
       sewa.setId(sewaDao.getSewaId());
@@ -118,17 +117,30 @@ public class ConfirmSewa extends HttpServlet {
       e.printStackTrace();
     }
     
+    
     session.setAttribute("sewa", sewa);
     session.setAttribute("booking", "booking");
     
+    
     if (valid == 0) {
-    	PrintWriter out = response.getWriter();
+    	
     	session.setAttribute("tanggal", "tanggal");
     	response.sendRedirect("/Garda-rent/sewa?id="+mobil.getId());
+    	
     }
     else {
+    	
+    	Part ktp = request.getPart("ktp");
+    	ktp.write("D:\\eclipse workspace\\Garda-rent\\WebContent\\assets\\image\\ktp\\" + sewa.getId() + "_KTP.jpg");
+    	
+    	Part sim = request.getPart("sim");
+    	sim.write("D:\\eclipse workspace\\Garda-rent\\WebContent\\assets\\image\\sim\\" + sewa.getId() + "_SIM.jpg");
+
+	    
+	    
     	response.sendRedirect("/Garda-rent/detailsewa?id="+sewa.getId());
     }
+    
     
   }
   

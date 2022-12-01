@@ -36,26 +36,38 @@
                                 <label class="col-sm-3">Merk Mobil</label>
                                 <input type="text" class="form-control col-sm-9"  value="${sessionScope['mobil'].merek}" name="merk" placeholder="Isi Merk">
                             </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-3">Warna</label>
+                                <input type="text" class="form-control col-sm-9"  value="${sessionScope['mobil'].warna}" name="merk" placeholder="Isi Merk">
+                            </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-3">Harga</label>
-                                <input type="text" class="form-control col-sm-9"  value="${sessionScope['mobil'].harga}" name="harga" placeholder="Isi Harga">
+                                <input type="number" class="form-control col-sm-9"  value="${sessionScope['mobil'].harga}" name="harga" placeholder="Isi Harga">
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-3">Kapasitas</label>
+                                <input type="number" class="form-control col-sm-9"  value="${sessionScope['mobil'].kapasitas}" name="harga" placeholder="Isi Harga">
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-3">Kilometer</label>
+                                <input type="number" class="form-control col-sm-9"  value="${sessionScope['mobil'].km}" name="harga" placeholder="Isi Harga">
                             </div>
 
                         </div>
 
                         <div class="col-sm-6">
 
-                            <div class="form-group row">
-                                <label class="col-sm-3">Deskripsi</label>
-                                <input type="text" class="form-control col-sm-9"  value="" name="deskripsi" placeholder="Isi Deskripsi">
-                            </div>
-
+           
                             <div class="form-group row">
                                 <label class="col-sm-3">Status</label>
                                 <select class="form-control col-sm-9" name="status">
                                     <option value="" disabled selected>Pilih Status</option>
-                                   
+                                   	<option value="Tersedia" >Tersedia</option>
+                                   	<option value="Tidak Tersedia" >Tidak Tersedia</option>
                                 </select>
                             </div>
 
@@ -66,7 +78,7 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3">Penampakan</label>
-                                <img src="assets/image/${sessionScope['mobil'].id}.jpg" class="img-fluid" style="width:200px;">                               
+                                <img src="assets/image/mobil/${sessionScope['mobil'].id}.jpg" class="img-fluid" style="width:200px;">                               
                             </div>
                             <input type="hidden" value="" name="gambar_cek">
                         </div>
