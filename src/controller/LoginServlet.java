@@ -71,7 +71,6 @@ public class LoginServlet extends HttpServlet {
       if (akun.getRole().equals("customer")) {
         System.out.println("Sesi Login : " + session.getId());
         session.setAttribute("akun", akun);
-        session.setAttribute("username", akun.getUsername());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/home");
         dispatcher.forward(request, response);
       } else {
@@ -80,11 +79,8 @@ public class LoginServlet extends HttpServlet {
         dispatcher.forward(request, response);
       }
     } else {
-      response.setContentType("text/html");
-      PrintWriter pw = response.getWriter();
-      RequestDispatcher dispatcher = request.getRequestDispatcher(
-        "WEB-INF/views/loginfailed.jsp"
-      );
+      session.setAttribute("incorrect", "incorrect");
+      RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
       dispatcher.forward(request, response);
     }
   }

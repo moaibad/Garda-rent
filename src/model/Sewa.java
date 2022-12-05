@@ -18,11 +18,30 @@ public class Sewa {
   private String status;
   private String nama_mobil;
   private String tgl_sewa;
+  private String tgl_kembali;
   private java.sql.Date tanggal_sewa;
   private String estimasi_selesai;
+  private int denda;
   
 
+
   
+public String getTgl_kembali() {
+	return tgl_kembali;
+}
+
+public void setTgl_kembali(String tgl_kembali) {
+	this.tgl_kembali = tgl_kembali;
+}
+
+public int getDenda() {
+	return denda;
+}
+
+public void setDenda(int denda) {
+	this.denda = denda;
+}
+
 public String getSim() {
 	return sim;
 }

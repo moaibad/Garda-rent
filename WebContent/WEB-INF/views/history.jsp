@@ -3,17 +3,16 @@ pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.util.List"%>
 <%@page import="model.Sewa"%>
+<%@include file="/header.jsp" %>
 
 <%
-String username = (String)session.getAttribute("username");
-
-if(username==null) { // Means session is not there
-session.setAttribute("login","login");%>
-<jsp:forward page="/index.jsp" />
+if(akun==null) { // Means session is not there
+	session.setAttribute("login","login");%>
+	<jsp:forward page="/index.jsp" />
 <%}%>
 
 
-<%@include file="/header.jsp" %>
+
 
 <br>
 <br>

@@ -10,7 +10,7 @@ import model.Akun;
 public class AkunDao {
 
   public int registerCustomer(Akun akun) throws ClassNotFoundException {
-    String sql = "{call registrasiAkun (?, ?, ?, ?, ?)}";
+    String sql = "{call tambahAkun (?, ?, ?, ?, ?, ?)}";
 
     int result = 0;
 
@@ -29,8 +29,16 @@ public class AkunDao {
       callableStatement.setString(2, akun.getPassword());
       callableStatement.setString(3, akun.getNama());
       callableStatement.setString(4, akun.getUsername());
-      callableStatement.setString(5, akun.getRole());
+      callableStatement.setString(5, akun.getRole());     
+      callableStatement.registerOutParameter(6, java.sql.Types.INTEGER);
 
+      callableStatement.executeUpdate();
+      result = callableStatement.getInt(6);
+      
+      if (result==0) {
+    	  System.out.println("Register tidak berhasil!"); /*Masukan Inputan Valid*/
+      }
+      
       System.out.println(callableStatement);
 
       // Step 3: Execute the query or update query
@@ -40,6 +48,8 @@ public class AkunDao {
     } catch (Exception e) {
       // process sql exception
       e.printStackTrace();
+      System.out.println("Username/Email sudah digunakan!");
+      result = 0;
     }
     return result;
   }

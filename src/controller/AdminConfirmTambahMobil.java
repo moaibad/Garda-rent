@@ -67,7 +67,7 @@ public class AdminConfirmTambahMobil extends HttpServlet {
 	    mobil.setHarga(Integer.parseInt(request.getParameter("harga")));
 	    
 	    try {
-			mobilDao.tambah_sewa(mobil);
+			mobilDao.tambah_mobil(mobil);
 			mobil_id = mobilDao.getMobilId();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

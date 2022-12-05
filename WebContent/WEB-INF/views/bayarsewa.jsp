@@ -3,6 +3,13 @@ pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/header.jsp" %>
 
+
+<%
+if(akun==null) { // Means session is not there
+	session.setAttribute("login","login");%>
+	<jsp:forward page="/index.jsp" />
+<%}%>
+
 <br>
 <br>
 <div class="container">
@@ -36,7 +43,7 @@ pageEncoding="ISO-8859-1"%>
                         <tr>
                             <td>Atas Nama </td>
                             <td> :</td>
-                            <td><input type="text" name="nama" required class="form-control"></td>
+                            <td><input type="text" name="nama_rekening" required class="form-control"></td>
                         </tr>
                         <tr>
                             <td>Nominal  </td>
@@ -46,7 +53,7 @@ pageEncoding="ISO-8859-1"%>
                         <tr>
                             <td>Tanggal  Transfer</td>
                             <td> :</td>
-                            <td><input type="date" name="tgl" required class="form-control"></td>
+                            <td><input type="date" name="tanggal_transfer" id=""required class="form-control"></td>
                         </tr>
                         <tr>
                             <td>Total yg Harus di Bayar </td>

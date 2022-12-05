@@ -46,7 +46,7 @@ public class HomeServlet extends HttpServlet {
     List<Mobil> listMobil = new ArrayList<Mobil>();
 
     try {
-      listMobil = mobilDao.list_mobil();
+      listMobil = mobilDao.list_tersedia();
       session.setAttribute("listMobil", listMobil);
     } catch (ClassNotFoundException e) {
       // TODO Auto-generated catch block

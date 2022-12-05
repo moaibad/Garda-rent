@@ -6,11 +6,9 @@ pageEncoding="ISO-8859-1"%> <%@include file="/header.jsp" %>
 
 
 <%
-String username = (String)session.getAttribute("username");
-
-if(username==null) { // Means session is not there
-session.setAttribute("login","login");%>
-<jsp:forward page="/index.jsp" />
+if(akun==null) { // Means session is not there
+	session.setAttribute("login","login");%>
+	<jsp:forward page="/index.jsp" />
 <%}%>
 
 
@@ -70,7 +68,7 @@ if(tanggal!=null) { // Means session is not there
             </div>
             <div class="form-group">
               <label for="">Tanggal Sewa</label>
-              <input type="date" name="tanggal" id="minDate"required class="form-control" placeholder="Nama Anda"/>
+              <input type="date" name="tanggal" id=""required class="form-control"/>
             </div>
             <div class="form-group">
               <label for="">Lama Sewa</label>

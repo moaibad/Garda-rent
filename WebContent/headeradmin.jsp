@@ -43,7 +43,7 @@
                     <a class="nav-link" href="http://localhost:8081/Garda-rent/adminsewa">Daftar Booking</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="peminjaman.jsp">Peminjaman/Pengembalian</a>
+                    <a class="nav-link" href="http://localhost:8081/Garda-rent/adminpeminjaman">Peminjaman/Pengembalian</a>
                 </li>
              </ul>
              <ul class="navbar-nav my-2 my-lg-0">

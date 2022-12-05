@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,11 +50,25 @@ public class ConfirmBayarSewa extends HttpServlet {
 		Sewa sewa = new Sewa();
 	    sewa = (Sewa) request.getSession().getAttribute("sewa");
 	    
+	    java.util.Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("tanggal_transfer"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+	    java.sql.Date tanggal_transfer = new java.sql.Date(date.getTime());	    	    
+	    
+	    
 		Pembayaran pembayaran = new Pembayaran();
 		
 		pembayaran.setRekening(request.getParameter("rekening"));
+		pembayaran.setNama_rekening(request.getParameter("nama_rekening"));
 		pembayaran.setNominal(Integer.parseInt(request.getParameter("nominal")));
 		pembayaran.setSewa_id(sewa.getId());
+		pembayaran.setTanggal_transfer(tanggal_transfer);
 		
 		System.out.println(pembayaran.getSewa_id());
 		

@@ -3,16 +3,22 @@
 
 <%@page import="java.util.List"%>
 <%@page import="model.Mobil"%>
-
-<%
-String username = (String)session.getAttribute("username");
-
-if(username==null) { // Means session is not there
-session.setAttribute("login","login");%>
-<jsp:forward page="/index.jsp" />
-<%}%>
+<%@page import="model.Akun"%>
 
 <%@include file="/header.jsp" %>
+
+<%
+if(akun==null) { // Means session is not there
+	session.setAttribute("login","login");%>
+	<jsp:forward page="/index.jsp" />
+<%}%>
+
+<div class="jumbotron">
+  <h3 class="display-4">Hello, ${sessionScope['akun'].nama}</h3>
+  <p class="lead"><i class="fa fa-car" aria-hidden="true"></i> Selamat datang di Garda-Rent <i class="fa fa-smile-o" aria-hidden="true"></i> !</p>
+  <hr class="my-1">
+</div>
+
 <div class="container">
 <div class="row">
     <div class="col-sm-12">
@@ -47,7 +53,7 @@ session.setAttribute("login","login");%>
                         	<%if(mobil.getStatus().equals("Tersedia")) {%>
 						    	<a href="/Garda-rent/sewa?id=<%=mobil.getId()%>" class="btn btn-success">Booking now!</a>
 	                        <%}%>
-                            <a href="detail.php?id=<?php echo $isi['id_mobil'];?>" class="btn btn-info">Detail</a>
+                            <a href="/Garda-rent/detailmobil?id=<%=mobil.getId()%>" class="btn btn-info">Detail</a>
                         </center>
                     </div>
                 </div>

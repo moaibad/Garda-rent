@@ -20,11 +20,11 @@
                     
                         <div class="form-group">
                             <label for="">Nama Pengguna</label>
-                            <input type="text" class="form-control" value="${sessionScope['akun'].nama}" name="nama_pengguna" id="nama_pengguna" placeholder=""/>
+                            <input type="text" class="form-control" value="${sessionScope['akun'].nama}" name="nama_pengguna" id="nama_pengguna" placeholder="" disabled/>
                         </div>
                         <div class="form-group">
                             <label for="">Username</label>
-                            <input type="text" required class="form-control" value="${sessionScope['akun'].username}" name="username" id="username" placeholder=""/>
+                            <input type="text" required class="form-control" value="${sessionScope['akun'].username}" name="username" id="username" placeholder="" disabled/>
                         </div>
                         <div class="form-group">
                             <label for="">Password</label>

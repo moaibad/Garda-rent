@@ -37,10 +37,10 @@
                     <a class="nav-link" href="http://localhost:8081/Garda-rent/home">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="blog.php">Daftar Mobil</a>
+                    <a class="nav-link" href="http://localhost:8081/Garda-rent/daftarmobil">Daftar Mobil</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="kontak.php">Kontak Kami</a>
+                    <a class="nav-link" href="http://localhost:8081/Garda-rent/kontak">Kontak Kami</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="http://localhost:8081/Garda-rent/history?id=${sessionScope['akun'].id}">History</a>

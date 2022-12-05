@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%> 
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@include file="/header.jsp" %>
 
 
 <%
-String username = (String)session.getAttribute("username");
-
-if(username==null) { // Means session is not there
-session.setAttribute("login","login");%>
-<jsp:forward page="/index.jsp" />
+if(akun==null) { // Means session is not there
+	session.setAttribute("login","login");%>
+	<jsp:forward page="/index.jsp" />
 <%}%>
 
 <%
@@ -31,18 +30,17 @@ if(booking!=null) { // Means session is not there
         <div class="card-body text-center">
           <h5>Pembayaran Dapat Melalui :</h5>
           <hr />
-          <p>BRI : 1011121314</p>
+          <p>BRI A/N Suci Awalia Gardara 0700006801322</p>
         </div>
       </div>
       <br />
       <div class="card">
+      	<img src="assets/image/mobil/${sessionScope['mobil'].id}.jpg" class="card-img-top" style="height:200px;object-fit:cover;">
+      	
         <div class="card-body" style="background: #ddd">
           <h5 class="card-title">${sessionScope['mobil'].nama}</h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item bg-primary text-white">
-            <i class="fa fa-check"></i> Available
-          </li>
           <li class="list-group-item bg-info text-white">
             <i class="fa fa-check"></i> Free E-toll 50k
           </li>
@@ -60,11 +58,6 @@ if(booking!=null) { // Means session is not there
               <td>Kode Booking</td>
               <td>:</td>
               <td>${sessionScope['sewa'].id}</td>
-            </tr>
-            <tr>
-              <td>KTP</td>
-              <td>:</td>
-              <td>${sessionScope['sewa'].ktp}</td>
             </tr>
             <tr>
               <td>Nama</td>
@@ -87,9 +80,9 @@ if(booking!=null) { // Means session is not there
               <td>${sessionScope['sewa'].lama_sewa} hari</td>
             </tr>
             <tr>
-              <td>Estimasi Selesai</td>
+              <td>Tanggal Kembali</td>
               <td>:</td>
-              <td>${sessionScope['sewa'].estimasi_selesai}</td>
+              <td>${sessionScope['sewa'].tgl_kembali}</td>
             </tr>
             <tr>
               <td>Total Harga</td>
@@ -102,13 +95,33 @@ if(booking!=null) { // Means session is not there
               <td>${sessionScope['sewa'].status}</td>
             </tr>
           </table>
-
-          <a
-            href="/Garda-rent/bayarsewa"
-            class="btn btn-primary float-right"
-            >Konfirmasi Pembayaran</a
-          >
-          <?php }?>
+		  
+		  <c:if test="${sessionScope['sewa'].status == 'Belum Bayar'}">
+		  	<div class="alert alert-warning" role="alert">
+			  	Silahkan selesaikan pembayaran!
+			</div>
+			<a href="/Garda-rent/bayarsewa" class="btn btn-primary float-right">
+				Konfirmasi Pembayaran
+            </a>
+		  </c:if>
+		  
+		  <c:if test="${sessionScope['sewa'].status == 'Sedang di proses'}">
+			<div class="alert alert-primary" role="alert">
+			  Mohon tunggu, pembayaran akan di proses 1x24 jam
+			</div>
+		  </c:if>
+		  
+		  <c:if test="${sessionScope['sewa'].status == 'Lunas'}">
+			<div class="alert alert-success" role="alert">
+			  Pembayaran Lunas, silahkan datang ke kantor pada tanggal yang telah ditentukan untuk mengambil mobil
+			</div>
+		  </c:if>
+          
+          <c:if test="${sessionScope['sewa'].status == 'Denda'}">
+			<div class="alert alert-danger" role="alert">
+			  Anda sudah melewati jatuh tempo pengembalian, silahkan ke kantor untuk mengembalikan mobil dan membayar biaya keterlambatan !
+		  </c:if>
+		  
         </div>
       </div>
     </div>

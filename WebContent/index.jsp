@@ -2,11 +2,9 @@
 
 
 <%
-String username = (String)session.getAttribute("username");
-
-if(username!=null) { // Means session is not there
-session.setAttribute("login","login");%>
-<jsp:forward page="/WEB-INF/views/customerhome.jsp" />
+if(akun!=null) { // Means session is not there
+	session.setAttribute("login","login");%>
+	<jsp:forward page="/WEB-INF/views/customerhome.jsp" />
 <%}%>
 
 
@@ -51,6 +49,11 @@ body{
 	                       <a class="btn btn-danger text-white" data-toggle="modal" data-target="#modelId">
                             Daftar
                          	</a></center>
+                         	<%if(session.getAttribute("incorrect") != null){%>
+	                         	<div class="alert alert-danger mt-3" role="alert" sty>
+					              Masukan username/password yang valid !
+					            </div>
+				            <%session.removeAttribute("incorrect");}%>
 	                   </form>
 	        	</div>
 	    	</div>
@@ -59,10 +62,7 @@ body{
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
-	
+
 
 <!-- Modal -->
 <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -90,7 +90,7 @@ body{
                     </div>
                     <div class="form-group">
                     <label for="">Email</label>
-                    <input type="text" name="email" id="" class="form-control" required placeholder="" aria-describedby="helpId">
+                    <input type="email" name="email" id="" class="form-control" required placeholder="" aria-describedby="helpId">
                     </div>
             </div>
             <div class="modal-footer">

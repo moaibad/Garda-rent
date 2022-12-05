@@ -48,7 +48,7 @@ public class SewaDao {
   }
   
   public int tambahPembayaran(Pembayaran pembayaran) throws ClassNotFoundException {
-	    String sql = "{call tambahPembayaran (?, ?, ?)}";
+	    String sql = "{call tambahPembayaran (?, ?, ?, ?, ?)}";
 
 	    int result;
 
@@ -57,11 +57,15 @@ public class SewaDao {
 	    try (
 	      Connection connection = DriverManager.getConnection(
 	        "jdbc:oracle:thin:@localhost:1521:xe","TEST","123");
+	    		
 	      // Step 2:Create a statement using connection object
 	      CallableStatement callableStatement = connection.prepareCall(sql)) {
 	      callableStatement.setString(1, pembayaran.getRekening());
 	      callableStatement.setInt(2, pembayaran.getNominal());
 	      callableStatement.setString(3, pembayaran.getSewa_id());
+	      callableStatement.setDate(4, pembayaran.getTanggal_transfer());
+	      callableStatement.setString(5, pembayaran.getNama_rekening());
+	      
 	      System.out.println(callableStatement);
 	      callableStatement.executeUpdate();
 	      connection.close();
@@ -70,6 +74,7 @@ public class SewaDao {
 	    } catch (Exception e) {
 	      // process sql exception
 	      e.printStackTrace();
+	      System.out.println("Tambah pembayaran gagal!");
 	    }
 	    return 0;
 	  }
@@ -108,11 +113,14 @@ public class SewaDao {
 	        sewa.setStatus(result.getString("status"));
 	        sewa.setLama_sewa(result.getInt("lama_sewa"));
 	        sewa.setKtp(result.getString("ktp"));
+	        sewa.setSim(result.getString("sim"));
 	        sewa.setTelepon(result.getString("telepon"));
 	        sewa.setNama(result.getString("nama"));
 	        sewa.setSupir_id(result.getString("supir_id"));
 	        sewa.setTgl_sewa(result.getDate("tanggal_sewa").toString());
+	        sewa.setTgl_kembali(result.getDate("tanggal_kembali").toString());
 	        sewa.setEstimasi_selesai(result.getDate("tanggal_kembali").toString());
+	        sewa.setDenda(result.getInt("denda"));
 	        
 	        result.close();
 	        preparedStatement.close();
@@ -147,7 +155,8 @@ public class SewaDao {
 	    		+ "FROM sewa "
 	    		+ "INNER JOIN mobil ON sewa.mobil_id=mobil.id "
 	    		+ "INNER JOIN akun on sewa.customer_id = akun.id "
-	    		+ "WHERE sewa.customer_id = ?")) {
+	    		+ "WHERE sewa.customer_id = ? "
+	    		+ "ORDER by sewa.id desc")) {
 	      preparedStatement.setString(1, customer_id);
 	      
 	      ResultSet rs = preparedStatement.executeQuery();
@@ -243,9 +252,10 @@ public class SewaDao {
 		    	Pembayaran pembayaran = new Pembayaran();
 		        pembayaran.setId(result.getString("id"));
 		        pembayaran.setRekening(result.getString("rekening"));
-		        pembayaran.setTanggal(result.getDate("tanggal").toString());
+		        pembayaran.setTgl_transfer(result.getDate("tanggal_transfer").toString());
 		        pembayaran.setNominal(result.getInt("nominal"));
 		        pembayaran.setSewa_id(result.getString("sewa_id"));
+		        pembayaran.setNama_rekening(result.getString("nama_rekening"));
 		        
 		        result.close();
 		        preparedStatement.close();
@@ -264,6 +274,83 @@ public class SewaDao {
 		    }
 		    return null;
 		  }
+  
+  public int updateSewa(String sewa_id, String status) throws ClassNotFoundException {
+	    String sql = "{call updateSewa (?, ?)}";
+
+	    Class.forName("oracle.jdbc.driver.OracleDriver");
+	    int result = 1;
+	    try (
+	      Connection connection = DriverManager.getConnection(
+	        "jdbc:oracle:thin:@localhost:1521:xe","TEST","123");
+	      // Step 2:Create a statement using connection object
+	      CallableStatement callableStatement = connection.prepareCall(sql)) {
+	      callableStatement.setString(1, sewa_id);
+	      callableStatement.setString(2, status);
+	      System.out.println(callableStatement);
+	      
+	      callableStatement.executeUpdate();
+	      connection.close();
+	      callableStatement.close();
+	      return result;
+	      // Step 3: Execute the query or update query
+	    } catch (Exception e) {
+	      // process sql exception
+	      e.printStackTrace();
+	      result = 0;
+	    }
+	    return result;
+  }
+  
+  public int hitungDenda(String sewa_id) throws ClassNotFoundException {
+	    String sql = "{call hitungDenda (?)}";
+
+	    Class.forName("oracle.jdbc.driver.OracleDriver");
+	    int result = 1;
+	    try (
+	      Connection connection = DriverManager.getConnection(
+	        "jdbc:oracle:thin:@localhost:1521:xe","TEST","123");
+	      // Step 2:Create a statement using connection object
+	      CallableStatement callableStatement = connection.prepareCall(sql)) {
+	      callableStatement.setString(1, sewa_id);
+	      System.out.println(callableStatement);
+	      
+	      callableStatement.executeUpdate();
+	      connection.close();
+	      callableStatement.close();
+	      return result;
+	      // Step 3: Execute the query or update query
+	    } catch (Exception e) {
+	      // process sql exception
+	      e.printStackTrace();
+	      result = 0;
+	    }
+	    return result;
+  }
+  
+  public void pengembalian(String sewa_id) throws ClassNotFoundException {
+	    String sql = "{call pengembalian (?)}";
+
+	    Class.forName("oracle.jdbc.driver.OracleDriver");
+	    int result = 1;
+	    try (
+	      Connection connection = DriverManager.getConnection(
+	        "jdbc:oracle:thin:@localhost:1521:xe","TEST","123");
+	      // Step 2:Create a statement using connection object
+	      CallableStatement callableStatement = connection.prepareCall(sql)) {
+	      callableStatement.setString(1, sewa_id);
+	      System.out.println(callableStatement);
+	      
+	      callableStatement.executeUpdate();
+	      connection.close();
+	      callableStatement.close();
+	      // Step 3: Execute the query or update query
+	    } catch (Exception e) {
+	      // process sql exception
+	      e.printStackTrace();
+	    }
+  }
+  
 }
 
 

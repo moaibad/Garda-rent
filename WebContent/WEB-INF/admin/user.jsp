@@ -13,7 +13,6 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
 </head>
 <body>
 	<br>
@@ -42,8 +41,7 @@
 								<td><%=akun.getId()%></td>
 								<td><%=akun.getNama()%></td>
 								<td><%=akun.getUsername() %></td>
-	                            <td>
-	                            	<a href="http://localhost:8081/Garda-rent/adminsewa?id=<%=akun.getId()%>" class="btn btn-success btn-sm">Edit User</a>  
+	                            <td> 
 	                                <a href="http://localhost:8081/Garda-rent/adminsewa?id=<%=akun.getId()%>" class="btn btn-primary btn-sm">Detail Transaksi</a>                                 
 	                            </td>   
 	                        </tr>
